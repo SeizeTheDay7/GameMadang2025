@@ -31,6 +31,9 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float chaseRange;
     int currentPatrolIndex = 0;
 
+    [Header(" - Rendering - ")]
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+
     [Header(" - Animation - ")]
     [SerializeField] protected Animator animator;
 
@@ -43,6 +46,9 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (!chaseRangeCollider)
             chaseRangeCollider = GetComponentInChildren<ChaseRangeCollider>();
+
+        if (!spriteRenderer)
+            TryGetComponent(out spriteRenderer);
 
         chaseRangeCollider.SetRadius(chaseRange);
     }
@@ -62,6 +68,9 @@ public abstract class EnemyBase : MonoBehaviour
     private void AttackRangeCollider_OnCollisionEnter(Attributes character)
     {
         this.character = character;
+
+        if (!IsLookingAtPlayer()) return;
+
         ChangeState(EnemyState.Chase);
     }
 
@@ -89,6 +98,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         float speed = currentState == EnemyState.Chase ? patrolSpeed * 1.5f : patrolSpeed;
         transform.position += (Vector3)(speed * Time.deltaTime * moveDirection);
+        spriteRenderer.flipX = moveDirection.x < 0;
 
         float distanceToPoint = Vector2.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position);
         if (distanceToPoint < 0.1f && currentState == EnemyState.Patrol)
@@ -149,7 +159,6 @@ public abstract class EnemyBase : MonoBehaviour
     {
         StopAllCoroutines();
 
-        print(Vector2.Distance(transform.position, character.Center));
         if (Vector2.Distance(transform.position, character.Center) > attackRange)
         {
             ChangeState(EnemyState.Chase);
@@ -184,6 +193,14 @@ public abstract class EnemyBase : MonoBehaviour
             moveDirection.y = 0;
             yield return null;
         }
+    }
+
+    bool IsLookingAtPlayer()
+    {
+        if (!character) return false;
+        int dir = spriteRenderer.flipX ? -1 : 1;
+        Vector3 toPlayer = (character.Center - transform.position).normalized;
+        return Vector2.Dot(toPlayer, Vector2.right * dir) > 0.5f;
     }
 
 }
