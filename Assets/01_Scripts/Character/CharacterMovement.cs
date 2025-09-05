@@ -80,7 +80,8 @@ public class CharacterMovement : MonoBehaviour
         if (pressMove)
         {
             float moveInput = moveAction.ReadValue<Vector2>().x;
-            sr.flipX = moveInput < 0;
+            // sr.flipX = moveInput < 0;
+            transform.localScale = new Vector3(moveInput < 0 ? -1 : 1, transform.localScale.y, 1);
 
             // Animator에 Blend Tree 추가하여 Idle, Walk, Run
             if (pressRun)
@@ -112,7 +113,7 @@ public class CharacterMovement : MonoBehaviour
         if (pressRG && platformExists && canReverseGravity)
         {
             Vector2 rgInput = reverseGravityAction.ReadValue<Vector2>();
-            transform.localScale = new Vector3(1, rgInput.y, 1);
+            transform.localScale = new Vector3(transform.localScale.x, -rgInput.y, 1);
             gravityDir = rgInput.y;
             StartCoroutine(CooldownRG());
 
