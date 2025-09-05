@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 10
   <AttackCooldown>k__BackingField: 1
+  <IdleTime>k__BackingField: 1
   <Projectile>k__BackingField: {fileID: 5366237375957084325, guid: cccd523826f7962439322b44e763c0fa, type: 3}

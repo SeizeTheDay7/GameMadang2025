@@ -10,8 +10,4 @@ public class RangeEnemy : EnemyBase
         base.Awake();
     }
 
-    protected override void Attack()
-    {
-        StartCoroutine(CoAttack());
-    }
 }

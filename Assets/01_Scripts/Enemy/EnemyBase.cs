@@ -1,13 +1,38 @@
 using System.Collections;
 using UnityEngine;
 
+public enum EnemyState
+{
+    None = -1,
+
+    Idle = 0,
+    Patrol = 1,
+    Chase = 2,
+    Attack = 3,
+    Dead = 4,
+
+    Max
+}
+
 public abstract class EnemyBase : MonoBehaviour
 {
     [Header(" - Attributes - ")]
     protected Attributes attributes;
-    protected bool canAttack = true;
-    [SerializeField] protected AttackRangeCollider attackRangeCollider;
     [SerializeField] protected float attackRange;
+
+    [Header(" - State - ")]
+    [SerializeField] protected EnemyState currentState = EnemyState.Idle;
+
+    [Header(" - Locomotion - ")]
+    [SerializeField] protected float patrolSpeed;
+    protected Vector2 moveDirection;
+    [SerializeField] protected PatrolPoint[] patrolPoints;
+    [SerializeField] protected ChaseRangeCollider chaseRangeCollider;
+    [SerializeField] protected float chaseRange;
+    int currentPatrolIndex = 0;
+
+    [Header(" - Animation - ")]
+    [SerializeField] protected Animator animator;
 
     [Header(" - Debug - ")]
     [SerializeField] protected Attributes character;
@@ -16,50 +41,149 @@ public abstract class EnemyBase : MonoBehaviour
     {
         TryGetComponent(out attributes);
 
-        if (!attackRangeCollider)
-            attackRangeCollider = GetComponentInChildren<AttackRangeCollider>();
+        if (!chaseRangeCollider)
+            chaseRangeCollider = GetComponentInChildren<ChaseRangeCollider>();
 
-        attackRangeCollider.SetRadius(attackRange);
+        chaseRangeCollider.SetRadius(chaseRange);
     }
 
     private void OnEnable()
     {
-        attackRangeCollider.OnCollision += AttackRangeCollider_OnCollision;
+        chaseRangeCollider.OnCollisionEnter += AttackRangeCollider_OnCollisionEnter;
+        chaseRangeCollider.OnCollisionExit += AttackRangeCollider_OnCollisionExit;
     }
+
+
     private void OnDisable()
     {
-        attackRangeCollider.OnCollision -= AttackRangeCollider_OnCollision;
+        chaseRangeCollider.OnCollisionEnter -= AttackRangeCollider_OnCollisionEnter;
+        chaseRangeCollider.OnCollisionExit -= AttackRangeCollider_OnCollisionExit;
+    }
+    private void AttackRangeCollider_OnCollisionEnter(Attributes character)
+    {
+        this.character = character;
+        ChangeState(EnemyState.Chase);
+    }
+
+    private void AttackRangeCollider_OnCollisionExit(Attributes attributes)
+    {
+        ChangeState(EnemyState.Patrol);
     }
 
     private void Start()
     {
-        if (attributes.Stat.AttackCooldownTime == null)
+        if (attributes.Stat.AttackCooldownTime == null || attributes.Stat.IdleTimeWait == null)
             attributes.Stat.Init();
-       
+
+        ChangeState(EnemyState.Patrol);
     }
 
-    private void AttackRangeCollider_OnCollision(Attributes character)
-    {
-        this.character = character;
-    }
+
 
     protected virtual void Update()
     {
-        if (character && canAttack)
-            Attack();
+        Move();
     }
 
-    protected abstract void Attack();
+    private void Move()
+    {
+        float speed = currentState == EnemyState.Chase ? patrolSpeed * 1.5f : patrolSpeed;
+        transform.position += (Vector3)(speed * Time.deltaTime * moveDirection);
+
+        float distanceToPoint = Vector2.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position);
+        if (distanceToPoint < 0.1f && currentState == EnemyState.Patrol)
+        {
+            StartCoroutine(CoIdle());
+            return;
+        }
+
+        if (currentState != EnemyState.Chase) return;
+
+        float distanceToCharacter = Vector2.Distance(transform.position, character.Center);
+        if (distanceToCharacter > chaseRange * 1.15f)
+        {
+            StopAllCoroutines();
+            ChangeState(EnemyState.Patrol);
+        }
+        else if (distanceToCharacter < attackRange)
+        {
+            ChangeState(EnemyState.Attack);
+        }
+    }
+
+    protected virtual void ChangeState(EnemyState newState)
+    {
+        if (currentState == newState)
+            return;
+
+        currentState = newState;
+
+        switch (currentState)
+        {
+            case EnemyState.Idle:
+                moveDirection = Vector2.zero;
+                break;
+            case EnemyState.Patrol:
+                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+                PatrolPoint patrolPoint = patrolPoints[currentPatrolIndex];
+                moveDirection = (patrolPoint.transform.position - transform.position).normalized;
+                moveDirection.y = 0;
+                break;
+            case EnemyState.Chase:
+                StartCoroutine(CoChase());
+                break;
+            case EnemyState.Attack:
+                moveDirection = Vector2.zero;
+                Attack();
+                break;
+            case EnemyState.Dead:
+                moveDirection = Vector2.zero;
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    protected virtual void Attack()
+    {
+        StopAllCoroutines();
+
+        print(Vector2.Distance(transform.position, character.Center));
+        if (Vector2.Distance(transform.position, character.Center) > attackRange)
+        {
+            ChangeState(EnemyState.Chase);
+            return;
+        }
+
+        StartCoroutine(CoAttack());
+    }
 
     protected IEnumerator CoAttack()
     {
-        canAttack = false;
         Vector2 direction = (character.Center - transform.position).normalized;
         var projectile = Instantiate(attributes.Stat.Projectile, transform.position, Quaternion.identity);
         projectile.transform.right = direction;
         projectile.Init(attributes);
         yield return attributes.Stat.AttackCooldownTime;
-        canAttack = true;
+        Attack();
+    }
+
+    protected virtual IEnumerator CoIdle()
+    {
+        ChangeState(EnemyState.Idle);
+        yield return attributes.Stat.IdleTimeWait;
+        ChangeState(EnemyState.Patrol);
+    }
+
+    protected virtual IEnumerator CoChase()
+    {
+        while (currentState == EnemyState.Chase)
+        {
+            moveDirection = (character.Center - transform.position).normalized;
+            moveDirection.y = 0;
+            yield return null;
+        }
     }
 
 }

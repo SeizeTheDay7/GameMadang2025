@@ -7,7 +7,7 @@ public class DrawGizmos : MonoBehaviour
     [SerializeField] private float size = 1f;
     [SerializeField] private Color gizmoColor = Color.green;
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         switch (gizmoType)
         {
