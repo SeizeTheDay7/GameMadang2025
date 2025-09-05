@@ -66,6 +66,7 @@ public class CharacterMovement : MonoBehaviour
         VerticalMove();
     }
 
+    // TODO :: 가속도 반영 여기로 옮기기
     void FixedUpdate()
     {
         body.linearVelocityX = velX;
