@@ -12,9 +12,9 @@ public class RangeEnemy : EnemyBase
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Vector3 offset = new Vector3(0, 0.1f, 0);
+        Vector3 offset = new Vector3(0, 0, 0.1f);
         if (!spriteRenderer)
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         int dir = spriteRenderer.flipX ? -1 : 1;
         Gizmos.DrawLine(transform.position + offset, transform.position + (Vector3)(Vector2.right) * dir + offset);
     }

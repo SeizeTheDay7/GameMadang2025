@@ -8,7 +8,7 @@ public class Attributes : MonoBehaviour
     [ReadOnly, SerializeField] protected float currentHealth;
     [field: SerializeField] public SO_Stat Stat { get; private set; }
 
-    Collider2D col;
+    Collider col;
     public Vector3 Center { get => col.bounds.center; }
 
     private void Awake()

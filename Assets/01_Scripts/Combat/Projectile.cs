@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider))]
 public class Projectile : MonoBehaviour
 {
     [Header(" - Projectile - ")]
@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
         transform.position += speed * Time.fixedDeltaTime * transform.right;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.TryGetComponent(out Attributes target))
         {
