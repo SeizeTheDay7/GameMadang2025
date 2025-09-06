@@ -9,6 +9,7 @@ public class CharacterGravityAttack : MonoBehaviour
     InputAction attackAction; // 마우스 왼쪽 버튼 할당
 
     [Header("Parameters")]
+    [SerializeField] float cancelDistance = 5f; // 홀드가 취소되는 거리
     [SerializeField] LayerMask interactableLayer;
 
     [Header("Calculation")]
@@ -42,21 +43,28 @@ public class CharacterGravityAttack : MonoBehaviour
         }
         else if (releaseAttack && grabbedObject != null)
         {
-            grabbedObject.GetComponent<Rigidbody2D>().gravityScale = prevGravityScale;
-            targetJoint.enabled = false;
-            targetJoint = null;
-            grabbedObject = null;
+            ReleaseAttack();
         }
 
+        Vector2 mousePos = GetCurrentMousePos();
         bool pressAttack = attackAction.IsPressed();
+        bool tooFarFromCharacter = Vector2.Distance(transform.position, mousePos) > cancelDistance;
 
         if (pressAttack)
         {
             if (grabbedObject == null) return;
+            if (tooFarFromCharacter) { ReleaseAttack(); return; }
 
-            Vector2 mousePos = GetCurrentMousePos();
             targetJoint.target = mousePos;
         }
+    }
+
+    private void ReleaseAttack()
+    {
+        grabbedObject.GetComponent<Rigidbody2D>().gravityScale = prevGravityScale;
+        targetJoint.enabled = false;
+        targetJoint = null;
+        grabbedObject = null;
     }
 
     private Transform GetGravityInteractable()
