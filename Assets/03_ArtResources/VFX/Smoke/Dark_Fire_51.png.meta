@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 8e5934f0153f5c34c8bd97178c31adaa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2327330806817706803
+    second: Dark_Fire_51_0
+  - first:
+      213: 3198259859536749104
+    second: Dark_Fire_51_1
+  - first:
+      213: 5315655460495406614
+    second: Dark_Fire_51_2
+  - first:
+      213: -4356013221793068636
+    second: Dark_Fire_51_3
+  - first:
+      213: 3269592003346404426
+    second: Dark_Fire_51_4
+  - first:
+      213: -4242070401421207487
+    second: Dark_Fire_51_5
+  - first:
+      213: -7553999559044602194
+    second: Dark_Fire_51_6
+  - first:
+      213: -8255117538837136205
+    second: Dark_Fire_51_7
+  - first:
+      213: 4654678838886344333
+    second: Dark_Fire_51_8
+  - first:
+      213: -5667546859496815760
+    second: Dark_Fire_51_9
+  - first:
+      213: -5394599193308988498
+    second: Dark_Fire_51_10
+  - first:
+      213: 7941669788077254931
+    second: Dark_Fire_51_11
+  - first:
+      213: -915220700193690646
+    second: Dark_Fire_51_12
+  - first:
+      213: 2636038263020244761
+    second: Dark_Fire_51_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Dark_Fire_51_0
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 398
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 333513fb9075c4020800000000000000
+      internalID: 2327330806817706803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_1
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 400
+        width: 48
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 032241ba560826c20800000000000000
+      internalID: 3198259859536749104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 335
+        width: 41
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 616b13f4a7005c940800000000000000
+      internalID: 5315655460495406614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_3
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 362
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a98e1ecd055c83c0800000000000000
+      internalID: -4356013221793068636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_4
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 284
+        width: 50
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a449bef9a9cef5d20800000000000000
+      internalID: 3269592003346404426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_5
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 211
+        width: 212
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 148171302732125c0800000000000000
+      internalID: -4242070401421207487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_6
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 261
+        width: 33
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea660b18c6dca2790800000000000000
+      internalID: -7553999559044602194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_7
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 275
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bcf38ef55eef6d80800000000000000
+      internalID: -8255117538837136205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_8
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 225
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d86295f0ebdb89040800000000000000
+      internalID: 4654678838886344333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_9
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 250
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 073cfc3c824d851b0800000000000000
+      internalID: -5667546859496815760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_10
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 103
+        width: 144
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eab75319d988225b0800000000000000
+      internalID: -5394599193308988498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_11
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 229
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 319ebc1789a763e60800000000000000
+      internalID: 7941669788077254931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_12
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 128
+        width: 95
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aebeed94f9b7c43f0800000000000000
+      internalID: -915220700193690646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Fire_51_13
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 165
+        width: 36
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91fc8a975d6159420800000000000000
+      internalID: 2636038263020244761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Dark_Fire_51_0: 2327330806817706803
+      Dark_Fire_51_1: 3198259859536749104
+      Dark_Fire_51_10: -5394599193308988498
+      Dark_Fire_51_11: 7941669788077254931
+      Dark_Fire_51_12: -915220700193690646
+      Dark_Fire_51_13: 2636038263020244761
+      Dark_Fire_51_2: 5315655460495406614
+      Dark_Fire_51_3: -4356013221793068636
+      Dark_Fire_51_4: 3269592003346404426
+      Dark_Fire_51_5: -4242070401421207487
+      Dark_Fire_51_6: -7553999559044602194
+      Dark_Fire_51_7: -8255117538837136205
+      Dark_Fire_51_8: 4654678838886344333
+      Dark_Fire_51_9: -5667546859496815760
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
