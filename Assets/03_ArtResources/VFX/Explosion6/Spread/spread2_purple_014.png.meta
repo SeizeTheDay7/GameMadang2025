@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: c10df25efd9051b40b099f4ea73c7802
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7913012216471900099
+    second: spread2_purple_014_0
+  - first:
+      213: -492981752756847985
+    second: spread2_purple_014_1
+  - first:
+      213: 5254991513729650763
+    second: spread2_purple_014_2
+  - first:
+      213: 602013048844310588
+    second: spread2_purple_014_3
+  - first:
+      213: 9037709723765616120
+    second: spread2_purple_014_4
+  - first:
+      213: 5885472207825193766
+    second: spread2_purple_014_5
+  - first:
+      213: -5985769019741233888
+    second: spread2_purple_014_6
+  - first:
+      213: 4479664369799732937
+    second: spread2_purple_014_7
+  - first:
+      213: 4310655884102453640
+    second: spread2_purple_014_8
+  - first:
+      213: 8956240215201069707
+    second: spread2_purple_014_9
+  - first:
+      213: 3262073206991162325
+    second: spread2_purple_014_10
+  - first:
+      213: 8082638537892203602
+    second: spread2_purple_014_11
+  - first:
+      213: -6875356359548969470
+    second: spread2_purple_014_12
+  - first:
+      213: 5815776614058185621
+    second: spread2_purple_014_13
+  - first:
+      213: -2495514710235191664
+    second: spread2_purple_014_14
+  - first:
+      213: 4309900351631513776
+    second: spread2_purple_014_15
+  - first:
+      213: -5817048398293729620
+    second: spread2_purple_014_16
+  - first:
+      213: -4813770024720572093
+    second: spread2_purple_014_17
+  - first:
+      213: -5523128950947887287
+    second: spread2_purple_014_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spread2_purple_014_0
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 371
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cf422a9faaa0dd60800000000000000
+      internalID: 7913012216471900099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_1
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 337
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8abd2235b39829f0800000000000000
+      internalID: -492981752756847985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_2
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 238
+        width: 152
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b405c8980fa7de840800000000000000
+      internalID: 5254991513729650763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_3
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 299
+        width: 69
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c38d386ada7ca5800800000000000000
+      internalID: 602013048844310588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_4
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 306
+        width: 62
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fda4242c156c6d70800000000000000
+      internalID: 9037709723765616120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_5
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 336
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62bcada5ac56da150800000000000000
+      internalID: 5885472207825193766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_6
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 254
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02d19ce5ac64eeca0800000000000000
+      internalID: -5985769019741233888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_7
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 233
+        width: 24
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ce13e29207fa2e30800000000000000
+      internalID: 4479664369799732937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_8
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 270
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 889cfd010b682db30800000000000000
+      internalID: 4310655884102453640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_9
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 241
+        width: 58
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8ab0260605fa4c70800000000000000
+      internalID: 8956240215201069707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_10
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 143
+        width: 102
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5db070e6c46354d20800000000000000
+      internalID: 3262073206991162325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_11
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 215
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25c82f23dec4b2070800000000000000
+      internalID: 8082638537892203602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_12
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 211
+        width: 49
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20e5cd471d3d590a0800000000000000
+      internalID: -6875356359548969470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_13
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 0
+        width: 142
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59356f5640ac5b050800000000000000
+      internalID: 5815776614058185621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_14
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 112
+        width: 66
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0966ba4c7962e5dd0800000000000000
+      internalID: -2495514710235191664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_15
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 50
+        width: 175
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b8d354f887dfcb30800000000000000
+      internalID: 4309900351631513776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_16
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 47
+        width: 39
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cae72724d41b54fa0800000000000000
+      internalID: -5817048398293729620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_17
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 22
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3416b1ebaad023db0800000000000000
+      internalID: -4813770024720572093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spread2_purple_014_18
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 31
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 947431e5b77e953b0800000000000000
+      internalID: -5523128950947887287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      spread2_purple_014_0: 7913012216471900099
+      spread2_purple_014_1: -492981752756847985
+      spread2_purple_014_10: 3262073206991162325
+      spread2_purple_014_11: 8082638537892203602
+      spread2_purple_014_12: -6875356359548969470
+      spread2_purple_014_13: 5815776614058185621
+      spread2_purple_014_14: -2495514710235191664
+      spread2_purple_014_15: 4309900351631513776
+      spread2_purple_014_16: -5817048398293729620
+      spread2_purple_014_17: -4813770024720572093
+      spread2_purple_014_18: -5523128950947887287
+      spread2_purple_014_2: 5254991513729650763
+      spread2_purple_014_3: 602013048844310588
+      spread2_purple_014_4: 9037709723765616120
+      spread2_purple_014_5: 5885472207825193766
+      spread2_purple_014_6: -5985769019741233888
+      spread2_purple_014_7: 4479664369799732937
+      spread2_purple_014_8: 4310655884102453640
+      spread2_purple_014_9: 8956240215201069707
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
