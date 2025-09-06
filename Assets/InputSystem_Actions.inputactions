@@ -525,6 +525,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "UpDown",
+                    "id": "c07dd371-76aa-49dc-877b-536ceb20af94",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReverseGravity",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Up",
+                    "id": "781c4325-e99a-4523-b2b7-8d9c55d68cb4",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReverseGravity",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Down",
+                    "id": "72d44f07-2a00-43a6-8df2-df90303d546d",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReverseGravity",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "1d57a2aa-5463-4dbf-8438-95dad2815328",
                     "path": "<Mouse>/leftButton",

@@ -117,12 +117,14 @@ public class CharacterMovement : MonoBehaviour
         {
             Vector2 rgInput = reverseGravityAction.ReadValue<Vector2>();
             transform.localScale = new Vector3(transform.localScale.x, -rgInput.y, 1);
-            transform.position += Vector3.up * (colliderOffsetY * 2 * rgInput.y);
             gravityDir = rgInput.y;
             StartCoroutine(CooldownRG());
 
-            // 땅에 붙어있을 때 중력 작용 바로 느껴지게
-            if (grounded) velY = gravityDir < 0 ? -reverseGravityInitialSpeed : reverseGravityInitialSpeed;
+            if (grounded)
+            {
+                velY = gravityDir < 0 ? -reverseGravityInitialSpeed : reverseGravityInitialSpeed; // 땅에 붙어있을 때 중력 작용 바로 느껴지게
+                transform.position += Vector3.up * (colliderOffsetY * 2 * rgInput.y);
+            }
         }
 
         if (pressJump && grounded)

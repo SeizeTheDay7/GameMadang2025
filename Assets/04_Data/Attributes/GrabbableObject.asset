@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bc35ec2c10be74fb1407a9c6899305, type: 3}
   m_Name: GrabbableObject
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 1
+  <Damage>k__BackingField: 10
   <AttackCooldown>k__BackingField: 0
   <IdleTime>k__BackingField: 0
   <Projectile>k__BackingField: {fileID: 0}
