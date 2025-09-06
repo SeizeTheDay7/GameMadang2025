@@ -46,6 +46,7 @@ public class CharacterMovement : MonoBehaviour
     float velY = 0;
     float gravityDir = -1f;
     bool canReverseGravity = true;
+    float colliderOffsetY;
 
     void Awake()
     {
@@ -53,6 +54,8 @@ public class CharacterMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+
+        colliderOffsetY = GetComponent<Collider2D>().offset.y;
 
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
@@ -114,6 +117,7 @@ public class CharacterMovement : MonoBehaviour
         {
             Vector2 rgInput = reverseGravityAction.ReadValue<Vector2>();
             transform.localScale = new Vector3(transform.localScale.x, -rgInput.y, 1);
+            transform.position += Vector3.up * (colliderOffsetY * 2 * rgInput.y);
             gravityDir = rgInput.y;
             StartCoroutine(CooldownRG());
 
