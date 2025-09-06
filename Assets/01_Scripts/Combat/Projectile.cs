@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -6,6 +7,7 @@ public class Projectile : MonoBehaviour
     [Header(" - Projectile - ")]
     [SerializeField, Min(0)] float speed;
     [SerializeField, Min(0)] float lifetime;
+    [SerializeField] bool isMelee = false;
 
     Attributes owner;
 
@@ -23,6 +25,8 @@ public class Projectile : MonoBehaviour
     {
         if (collision.TryGetComponent(out Attributes target))
         {
+            if (isMelee && !collision.TryGetComponent(out Character character)) return;
+
             if (!owner)
             {
                 target.TakeDamage(10);
@@ -35,5 +39,11 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    private IEnumerator CoDie()
+    {
+        yield return new WaitForSeconds(lifetime);
+        Destroy(gameObject);
     }
 }
