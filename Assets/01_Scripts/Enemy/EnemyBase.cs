@@ -22,6 +22,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     [Header(" - State - ")]
     [SerializeField] protected EnemyState currentState = EnemyState.Idle;
+    bool nearPlayer = false;
 
     [Header(" - Locomotion - ")]
     [SerializeField] protected float patrolSpeed;
@@ -68,6 +69,7 @@ public abstract class EnemyBase : MonoBehaviour
     private void AttackRangeCollider_OnCollisionEnter(Attributes character)
     {
         this.character = character;
+        nearPlayer = true;
 
         if (!IsLookingAtPlayer()) return;
 
@@ -76,6 +78,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void AttackRangeCollider_OnCollisionExit(Attributes attributes)
     {
+        nearPlayer = false;
         ChangeState(EnemyState.Patrol);
     }
 
@@ -87,11 +90,10 @@ public abstract class EnemyBase : MonoBehaviour
         ChangeState(EnemyState.Patrol);
     }
 
-
-
     protected virtual void Update()
     {
         Move();
+        CheckCharacterNotice();
     }
 
     private void Move()
@@ -119,6 +121,12 @@ public abstract class EnemyBase : MonoBehaviour
         {
             ChangeState(EnemyState.Attack);
         }
+    }
+
+    private void CheckCharacterNotice()
+    {
+        if (currentState != EnemyState.Idle && currentState != EnemyState.Patrol) return;
+        if (nearPlayer && IsLookingAtPlayer()) ChangeState(EnemyState.Chase);
     }
 
     protected virtual void ChangeState(EnemyState newState)
