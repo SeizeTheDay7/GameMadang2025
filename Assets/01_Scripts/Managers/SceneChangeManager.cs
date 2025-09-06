@@ -12,7 +12,6 @@ public class SceneChangeManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    [Button]
     public void LoadSceneAsync(int index)
     {
         StartCoroutine(LoadSceneAsyncCoroutine(index));
