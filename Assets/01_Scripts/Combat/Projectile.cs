@@ -41,6 +41,7 @@ public class Projectile : MonoBehaviour
         if (collision.TryGetComponent(out CharacterStat stat))
         {
             stat.TakeDamage((int)owner.Stat.Damage);
+            Destroy(gameObject);
         }
     }
 

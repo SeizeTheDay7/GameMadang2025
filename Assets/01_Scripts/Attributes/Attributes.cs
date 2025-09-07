@@ -76,7 +76,7 @@ public class Attributes : MonoBehaviour
 
     private void UpdateUI()
     {
-        hpCanvas.enabled = true;
-        hp.fillAmount = currentHealth / maxHealth;
+        // hpCanvas.enabled = true;
+        // hp.fillAmount = currentHealth / maxHealth;
     }
 }
