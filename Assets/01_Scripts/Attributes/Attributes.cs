@@ -36,8 +36,6 @@ public class Attributes : MonoBehaviour
     {
         currentHealth = Mathf.Max(currentHealth - stat.gravAttackDamage, 0);
         Debug.Log("Current Health: " + currentHealth);
-        currentHealth = Mathf.Max(currentHealth - damage, 0);
-
         UpdateUI();
 
         if (currentHealth == 0)
