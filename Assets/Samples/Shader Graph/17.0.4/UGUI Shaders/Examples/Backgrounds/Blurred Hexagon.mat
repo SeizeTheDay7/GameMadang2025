@@ -72,9 +72,10 @@ Material:
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
-    - _Background_Saturation: 0.48894784
+    - _BackgroundBlur: 0.679
+    - _Background_Saturation: 0.638
     - _BlendMode: 0
-    - _Blur: 0.86206895
+    - _Blur: 0.879
     - _BlurCycles: 3
     - _BlurSamplesPerCycle: 2
     - _Blur_Cycles: 4
@@ -92,10 +93,11 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
+    - _HexagonBlur: 0.542
     - _HexagonDisolve: 0.98
     - _HexagonTiles: 10
     - _Hexagon_Disolve: 0.97
-    - _Hexagon_Dissolve: 0.43543884
+    - _Hexagon_Dissolve: 0.89
     - _Hexagon_Tiles: 10
     - _MaterialID: 1
     - _MaterialTypeMask: 2
@@ -107,6 +109,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
+    - _Rotation: 0
     - _Saturation: 1
     - _SrcBlend: 1
     - _Stencil: 0
@@ -141,9 +144,10 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - _BackgroundColor: {r: 0.5283019, g: 0, b: 0.41101176, a: 0}
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Tint: {r: 1, g: 0, b: 0, a: 1}
+    - _Tint: {r: 0.02441454, g: 0, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

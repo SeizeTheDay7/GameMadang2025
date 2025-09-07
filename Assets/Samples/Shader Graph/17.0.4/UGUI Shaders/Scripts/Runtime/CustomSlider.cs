@@ -92,6 +92,13 @@ namespace Unity.UI.Shaders.Sample
                 onValueChanged?.Invoke(value);
             }
         }
+        public void SetValue(float value)
+        {
+            value = Mathf.Clamp01(value);
+            if (Mathf.Approximately(_value, value))
+                return;
+            Value = value;
+        }
 
         Vector2 DirectionVector => FromDirection(direction);
 
