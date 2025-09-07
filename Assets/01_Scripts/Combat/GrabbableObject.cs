@@ -1,25 +1,45 @@
+using System;
 using UnityEngine;
 
 public class GrabbableObject : MonoBehaviour
 {
     [Header(" - GrabbableObject - ")]
-    [SerializeField] float attackableSpeed = 10f;
-    [SerializeField] GameObject prefab;
-    Vector3 initPos;
-    GrabbableObjectManager manager;
+
+    [Header("Components")]
+    public Rigidbody body { get; private set; }
+
+    [Header("Parameters")]
+    [SerializeField] float followSpeed = 10f;
+
+    [Header("Calculation")]
+    float attackMinSpeed;
+    float attackDamage;
     Attributes owner;
-    Rigidbody2D body;
 
     void Awake()
     {
-        initPos = transform.position;
         owner = GetComponent<Attributes>();
-        body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody>();
     }
 
-    public void Init(GrabbableObjectManager mgr)
+    public void Grab(CharacterStat stat)
     {
-        manager = mgr;
+        attackMinSpeed = stat.gravAttackMinSpeed;
+        attackDamage = stat.gravAttackDamage;
+        body.useGravity = false;
+    }
+
+    public void FollowTarget(Vector3 targetPos)
+    {
+        Vector3 direction = (targetPos - transform.position).normalized;
+        direction.y = 0;
+        float distance = Vector3.Distance(transform.position, targetPos);
+        body.linearVelocity = direction * distance * followSpeed;
+    }
+
+    public void Release()
+    {
+        body.useGravity = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,23 +48,19 @@ public class GrabbableObject : MonoBehaviour
         {
             if (!owner)
             {
+                Debug.LogError("No Attributes component found in the GrabbableObject.");
                 target.TakeDamage(10);
                 return;
             }
 
             bool isEnemy = target.transform.TryGetComponent(out EnemyBase enemy);
-            bool fastEnough = body.linearVelocity.magnitude >= attackableSpeed;
+            bool fastEnough = body.linearVelocity.magnitude >= attackMinSpeed;
             // Debug.Log("(Collision occured) Speed of thrown object : " + body.linearVelocity.magnitude);
 
             if (isEnemy && fastEnough)
             {
-                target.TakeDamage(owner.Stat.Damage);
+                target.TakeDamage(attackDamage);
             }
         }
-    }
-
-    void OnDisable()
-    {
-        manager.QueueRespawn(transform, initPos);
     }
 }

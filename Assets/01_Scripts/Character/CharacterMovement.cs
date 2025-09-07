@@ -4,14 +4,15 @@ using System.Collections;
 
 // TODO :: Coyote Time, Jump buffer
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(Animator))]
 public class CharacterMovement : MonoBehaviour
 {
     [Header("Components")]
+    [SerializeField] CharacterStat stat;
     PlayerInput playerInput;
-    Rigidbody2D body;
+    Rigidbody body;
     Animator anim;
     SpriteRenderer sr;
 
@@ -46,16 +47,18 @@ public class CharacterMovement : MonoBehaviour
     float velY = 0;
     float gravityDir = -1f;
     bool canReverseGravity = true;
-    float colliderOffsetY;
+    float colliderOffsetZ;
+    int jumpCount = 0;
+    bool canJump = true;
 
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
-        colliderOffsetY = GetComponent<Collider2D>().offset.y;
+        colliderOffsetZ = GetComponent<CapsuleCollider>().center.z;
 
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
@@ -71,8 +74,7 @@ public class CharacterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        body.linearVelocityX = velX;
-        body.linearVelocityY = velY;
+        body.linearVelocity = new Vector3(velX, 0, velY);
     }
 
     private void HorizontalMove()
@@ -84,18 +86,18 @@ public class CharacterMovement : MonoBehaviour
         {
             float moveInput = moveAction.ReadValue<Vector2>().x;
             // sr.flipX = moveInput < 0;
-            transform.localScale = new Vector3(moveInput < 0 ? -1 : 1, transform.localScale.y, 1);
+            transform.localScale = new Vector3(moveInput < 0 ? -1 : 1, 1, transform.localScale.z);
 
             // Animator에 Blend Tree 추가하여 Idle, Walk, Run
-            if (pressRun)
-            {
-                anim.SetFloat("MoveValue", 1f);
-                velX = moveInput * moveSpeed * runMultiplier;
-            }
-            else
+            // if (pressRun)
+            // {
+            //     anim.SetFloat("MoveValue", 1f);
+            //     velX = moveInput * moveSpeed * stat.moveSpeedMultiplier * runMultiplier;
+            // }
+            // else
             {
                 anim.SetFloat("MoveValue", 0.5f);
-                velX = moveInput * moveSpeed;
+                velX = moveInput * moveSpeed * stat.moveSpeedMultiplier;
             }
         }
         else
@@ -111,54 +113,50 @@ public class CharacterMovement : MonoBehaviour
 
         bool pressJump = jumpAction.triggered;
         bool pressRG = reverseGravityAction.triggered;
-        bool platformExists = CheckPlatform();
 
-        if (pressRG && platformExists && canReverseGravity)
+        if (pressRG && canReverseGravity)
         {
             Vector2 rgInput = reverseGravityAction.ReadValue<Vector2>();
-            transform.localScale = new Vector3(transform.localScale.x, -rgInput.y, 1);
+            transform.localScale = new Vector3(transform.localScale.x, 1, -rgInput.y);
             gravityDir = rgInput.y;
             StartCoroutine(CooldownRG());
 
             if (grounded)
             {
                 velY = gravityDir < 0 ? -reverseGravityInitialSpeed : reverseGravityInitialSpeed; // 땅에 붙어있을 때 중력 작용 바로 느껴지게
-                transform.position += Vector3.up * (colliderOffsetY * 2 * rgInput.y);
+                transform.position += Vector3.forward * (colliderOffsetZ * 2 * rgInput.y);
             }
+
+            return;
         }
 
-        if (pressJump && grounded)
+        if (grounded && canJump) jumpCount = stat.maxJump;
+
+        if (pressJump && canJump && jumpCount > 0)
         {
+            jumpCount--;
             velY = jumpPower * gravityDir * -1;
+            StartCoroutine(CooldownJump());
+            return;
         }
-        else
-        {
-            velY += gravity * Time.deltaTime * gravityDir;
-            float maxFallSpeed_G = maxFallSpeed * gravityDir;
-            velY = gravityDir < 0 ? Mathf.Max(velY, maxFallSpeed_G) : Mathf.Min(maxFallSpeed_G, velY);
-        }
-    }
 
-    private bool CheckPlatform()
-    {
-        Vector2 checkDir = gravityDir > 0 ? Vector2.down : Vector2.up;
-        bool platformCheck = Physics2D.Raycast(transform.position, checkDir, reverseGravityPlatformCheckLength, groundLayer);
-        Debug.DrawRay(transform.position, checkDir * reverseGravityPlatformCheckLength, Color.blue);
-        return platformCheck;
+        velY += gravity * Time.deltaTime * gravityDir;
+        float maxFallSpeed_G = maxFallSpeed * gravityDir;
+        velY = gravityDir < 0 ? Mathf.Max(velY, maxFallSpeed_G) : Mathf.Min(maxFallSpeed_G, velY);
     }
 
     private IEnumerator CooldownRG()
     {
         canReverseGravity = false;
-        yield return new WaitForSeconds(reverseGravityCoolTime);
+        yield return new WaitForSeconds(stat.reverseGravCoolTime);
         canReverseGravity = true;
     }
 
     private void GroundCheck()
     {
-        Vector2 checkDir = gravityDir > 0 ? Vector2.up : Vector2.down;
-        bool leftCheck = Physics2D.Raycast(transform.position - groundCheckOffset, checkDir, groundCheckLength, groundLayer);
-        bool rightCheck = Physics2D.Raycast(transform.position + groundCheckOffset, checkDir, groundCheckLength, groundLayer);
+        Vector3 checkDir = gravityDir > 0 ? Vector3.forward : -Vector3.forward;
+        bool leftCheck = Physics.Raycast(transform.position - groundCheckOffset, checkDir, groundCheckLength, groundLayer);
+        bool rightCheck = Physics.Raycast(transform.position + groundCheckOffset, checkDir, groundCheckLength, groundLayer);
         Debug.DrawRay(transform.position - groundCheckOffset, checkDir * groundCheckLength, Color.red);
         Debug.DrawRay(transform.position + groundCheckOffset, checkDir * groundCheckLength, Color.red);
         if (leftCheck || rightCheck)
@@ -171,5 +169,12 @@ public class CharacterMovement : MonoBehaviour
             anim.SetBool("Grounded", false);
             grounded = false;
         }
+    }
+
+    private IEnumerator CooldownJump()
+    {
+        canJump = false;
+        yield return new WaitForSeconds(0.1f);
+        canJump = true;
     }
 }

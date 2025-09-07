@@ -265,7 +265,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         Vector3 startPos = transform.position;
         landingPos = destination;
-        float duration = 0.5f; // Á¡ÇÁ ½Ã°£ (Á¶Àý °¡´É)
+        float duration = 0.5f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         float elapsed = 0f;
         moveDirection = Vector3.zero;
 

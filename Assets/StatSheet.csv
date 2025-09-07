@@ -1,0 +1,13 @@
+Level,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+MaxHealth,5,10,,,,,,,,,,,,,,,,,,
+HeartDropRate,1,100,,,,,,,,,,,,,,,,,,
+InvinsibleTime,1,5,,,,,,,,,,,,,,,,,,
+DodgeRate,1,50,,,,,,,,,,,,,,,,,,
+MoveSpeedMultiplier,1,4,,,,,,,,,,,,,,,,,,
+ReverseGravCoolTime,4,2,,,,,,,,,,,,,,,,,,
+ReverseGravFallSpeed,1,,,,,,,,,,,,,,,,,,,
+MaxJump,2,3,,,,,,,,,,,,,,,,,,
+GravAttackDamage,10,100,,,,,,,,,,,,,,,,,,
+GravAttackMinSpeed,20,1,,,,,,,,,,,,,,,,,,
+BoxSpawnCoolTime,5,4.9,,,,,,,,,,,,,,,,,,
+PortalSpawnCoolTime,15,5,,,,,,,,,,,,,,,,,,

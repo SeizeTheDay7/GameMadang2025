@@ -7,7 +7,6 @@ public class Projectile : MonoBehaviour
     [Header(" - Projectile - ")]
     [SerializeField, Min(0)] float speed;
     [SerializeField, Min(0)] float lifetime;
-    [SerializeField] bool isMelee = false;
 
     Attributes owner;
 
