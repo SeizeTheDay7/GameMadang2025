@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statType: 1
   title: "\uD558\uD2B8 \uB4DC\uB78D \uD655\uB960 \uC99D\uAC00"
-  icon: {fileID: 0}
+  icon: {fileID: -5044790154462122514, guid: 19af81bdbcf5c044fa1b8874d0c7a638, type: 3}
   description: "\uCCB4\uB825\uC744 \uD68C\uBCF5\uC2DC\uCF1C\uC8FC\uB294 \uD558\uD2B8\uAC00
     \uB4F1\uC7A5\uD560 \uD655\uB960\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."

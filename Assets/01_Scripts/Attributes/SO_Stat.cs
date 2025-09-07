@@ -9,8 +9,9 @@ public class SO_Stat : ScriptableObject
     [field: SerializeField, Min(0)] public float IdleTime { get; private set; }
     public WaitForSeconds IdleTimeWait { get; private set; }
     [field: SerializeField] public Projectile Projectile { get; private set; }
-    [field: SerializeField, Range(0f,1f)] public float ItemDropPercentage { get; private set; }
+    [field: SerializeField, Range(0f, 1f)] public float ItemDropPercentage { get; private set; }
     [field: SerializeField] public Item Item { get; private set; }
+    [field: SerializeField] public float exp { get; private set; }
 
 
     public void Init()

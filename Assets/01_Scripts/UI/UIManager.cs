@@ -16,14 +16,14 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         GlobalData.OnHPChange += GlobalData_OnHPChange;
-        GlobalData.OnMPChange += GlobalData_OnMPChange;
+        GlobalData.OnExpChange += GlobalData_OnMPChange;
         GlobalData.OnTimePieceGet += GlobalData_OnTimePieceGet;
     }
 
     private void OnDisable()
     {
         GlobalData.OnHPChange -= GlobalData_OnHPChange;
-        GlobalData.OnMPChange -= GlobalData_OnMPChange;
+        GlobalData.OnExpChange -= GlobalData_OnMPChange;
         GlobalData.OnTimePieceGet -= GlobalData_OnTimePieceGet;
     }
 

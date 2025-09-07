@@ -24,14 +24,17 @@ public class Attributes : MonoBehaviour
         TryGetComponent(out col);
     }
 
-    public virtual void TakeDamage(float damage)
+    // Attributes의 TakeDamage는 적이 갖고 있는 것만 호출된다.
+    // 플레이어는 Projectile에게서 직접 데미지를 받는다.
+    // CharacterStat은 grabbableObject가 갖고있던 참조를 갖고 와서, 죽을 때 사용한다.
+    public virtual void TakeDamage(CharacterStat stat)
     {
-        currentHealth = Mathf.Max(currentHealth - damage, 0);
+        currentHealth = Mathf.Max(currentHealth - stat.gravAttackDamage, 0);
         Debug.Log("Current Health: " + currentHealth);
 
         if (currentHealth == 0)
         {
-            Die();
+            Die(stat);
         }
     }
 
@@ -41,17 +44,21 @@ public class Attributes : MonoBehaviour
     }
 
     [Button]
-    protected virtual void Die()
+    // 죽는 것 역시 플레이어는 CharacterStat에서만 일어난다.
+    // 이 Die는 적이 죽는 것.
+    protected virtual void Die(CharacterStat stat)
     {
         Debug.Log(gameObject.name + " died.");
 
-        if(isPlayer)
-        {
-            //������
-            return;
-        }
+        // if (isPlayer)
+        // {
+        //     //������
+        //     return;
+        // }
 
-        if(Stat.ItemDropPercentage >= Random.value)
+        stat.character.GainEXP(Stat.exp);
+
+        if (Stat.ItemDropPercentage >= Random.value)
         {
             Instantiate(Stat.Item, transform.position, Quaternion.identity);
         }

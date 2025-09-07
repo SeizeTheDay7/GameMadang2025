@@ -81,6 +81,8 @@ public class FlyingEnemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+
         if (agent.velocity.x > 0.1f)
             spriteRenderer.flipX = false;
         else if (agent.velocity.x < -0.1f)
@@ -171,7 +173,7 @@ public class FlyingEnemy : MonoBehaviour
 
     protected IEnumerator CoAttack()
     {
-        Vector2 direction = (character.Center - transform.position).normalized;
+        Vector3 direction = (character.Center - transform.position).normalized;
         var projectile = Instantiate(attributes.Stat.Projectile, transform.position, Quaternion.identity);
         projectile.transform.right = direction;
         projectile.Init(attributes);

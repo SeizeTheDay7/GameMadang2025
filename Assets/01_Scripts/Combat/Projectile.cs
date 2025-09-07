@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -23,21 +24,23 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.TryGetComponent(out Attributes target))
+        // if (collision.TryGetComponent(out Attributes target))
+        // {
+        //     if (!owner && collision.CompareTag("Player"))
+        //     {
+        //         target.TakeDamage(10);
+        //         return;
+        //     }
+
+        //     if (target != owner && collision.CompareTag("Player"))
+        //     {
+        //         target.TakeDamage(owner.Stat.Damage);
+        //         Destroy(gameObject);
+        //     }
+        // }
+        if (collision.TryGetComponent(out CharacterStat stat))
         {
-            if (isMelee && !collision.TryGetComponent(out Character character)) return;
-
-            if (!owner && collision.CompareTag("Player"))
-            {
-                target.TakeDamage(10);
-                return;
-            }
-
-            if (target != owner && collision.CompareTag("Player"))
-            {
-                target.TakeDamage(owner.Stat.Damage);
-                Destroy(gameObject);
-            }
+            stat.TakeDamage((int)owner.Stat.Damage);
         }
     }
 

@@ -49,7 +49,10 @@ public class CharacterGravityAttack : MonoBehaviour
 
     void FixedUpdate()
     {
-        grabbedObj?.FollowTarget(targetPos);
+        if (!grabbedObj) return;
+        grabbedObj.FollowTarget(targetPos);
+        Transform trs = grabbedObj.transform;
+        trs.position = new Vector3(trs.position.x, 0, trs.position.z);
     }
 
     private GrabbableObject GetGrabbableObject()

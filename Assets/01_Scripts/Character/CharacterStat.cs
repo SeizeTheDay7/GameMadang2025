@@ -9,12 +9,10 @@ public enum StatType
     DodgeRate, // 적용 완
     MoveSpeedMultiplier, // 적용 완
     ReverseGravCoolTime, // 적용 완
-    ReverseGravFallSpeed,
     MaxJump, // 적용 완
     GravAttackDamage, // 적용 완
     GravAttackMinSpeed, // 적용 완
     BoxSpawnCoolTime,// 적용 완
-    PortalSpawnCoolTime,
     // ThrowableMonster,
     // AttackType,
     // FireInstantKill,
@@ -27,6 +25,7 @@ public enum SpecialAttack { None, Fire, Ice, Electric }
 
 public class CharacterStat : MonoBehaviour
 {
+    public Character character;
     [Header("InGame Dynamic")]
     public int currentHealth;
     public float currentExp = 0;
@@ -45,7 +44,6 @@ public class CharacterStat : MonoBehaviour
     [Header("Movement")]
     public float moveSpeedMultiplier;
     public float reverseGravCoolTime;
-    public float reverseGravFallSpeed;
     public int maxJump = 2;
 
     [Header("Gravity Attack")]
@@ -96,6 +94,7 @@ public class CharacterStat : MonoBehaviour
         if (Random.value < dodgeRate * 0.01f) { Dodge(); return; }
 
         currentHealth -= damage;
+        GlobalData.OnHPChange?.Invoke(currentHealth);
         if (currentHealth <= 0) { Dead(); }
         else { StartCoroutine(CoInvinsible()); }
     }
@@ -116,6 +115,6 @@ public class CharacterStat : MonoBehaviour
 
     private void Dead()
     {
-        // TODO :: Game Over
+        // return to main menu
     }
 }

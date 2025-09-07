@@ -1,12 +1,13 @@
 using UnityEngine;
 using TMPro;
-using System;
+using UnityEngine.UI;
 
 public class StatUpCard : MonoBehaviour
 {
     public Character character;
     private StatType type;
     [field: SerializeField] public TextMeshProUGUI title { get; private set; }
+    [field: SerializeField] public Image image { get; private set; }
     [field: SerializeField] public TextMeshProUGUI detail { get; private set; }
 
     public void SetType(StatType type)

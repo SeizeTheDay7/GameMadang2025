@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statType: 0
   title: "\uCD5C\uB300 \uCCB4\uB825"
-  icon: {fileID: 0}
+  icon: {fileID: -4308780701375494235, guid: 1704e39675d64d443a628a585629ad40, type: 3}
   description: "\uCD5C\uB300 \uCCB4\uB825\uC744 \uC62C\uB9BD\uB2C8\uB2E4."

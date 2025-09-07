@@ -11,7 +11,7 @@ public class Tester : MonoBehaviour
     [Button]
     void SetMP(float mp)
     {
-        GlobalData.OnMPChange?.Invoke(mp);
+        GlobalData.OnExpChange?.Invoke(mp);
     }
     [Button]
     void GetTimePiece()
