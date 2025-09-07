@@ -52,13 +52,13 @@ public class Attributes : MonoBehaviour
     [Button]
     protected virtual void Die()
     {
-        if(isPlayer)
+        if (isPlayer)
         {
-            //¿£µù¾À
+            SceneChangeManager.Instance.LoadSceneAsync("GameOver");
             return;
         }
 
-        if(Stat.ItemDropPercentage >= Random.value)
+        if (Stat.ItemDropPercentage >= Random.value)
         {
             Instantiate(Stat.Item, transform.position, Quaternion.identity);
         }
@@ -68,7 +68,11 @@ public class Attributes : MonoBehaviour
 
     private void UpdateUI()
     {
-        if (isPlayer) return;
+        if (isPlayer)
+        {
+            GlobalData.OnHPChange?.Invoke(currentHealth / maxHealth);
+            return;
+        }
 
         hpCanvas.enabled = true;
         hp.fillAmount = currentHealth / maxHealth;

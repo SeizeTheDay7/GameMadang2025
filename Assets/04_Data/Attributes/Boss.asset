@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bc35ec2c10be74fb1407a9c6899305, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 0
+  <Damage>k__BackingField: 20
   <AttackCooldown>k__BackingField: 0.1
   <IdleTime>k__BackingField: 1
   <Projectile>k__BackingField: {fileID: 5366237375957084325, guid: 9161f1878906093439aebb38a2922d02, type: 3}
