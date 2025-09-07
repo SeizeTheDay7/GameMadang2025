@@ -7,6 +7,7 @@ public class Attributes : MonoBehaviour
     [SerializeField, Min(0)] protected float maxHealth;
     [ReadOnly, SerializeField] protected float currentHealth;
     [field: SerializeField] public SO_Stat Stat { get; private set; }
+    [SerializeField] bool isPlayer;
 
     Collider col;
     public Vector3 Center { get => col.bounds.center; }
@@ -34,9 +35,27 @@ public class Attributes : MonoBehaviour
         }
     }
 
+    public virtual void Heal(float healAmount)
+    {
+        currentHealth = Mathf.Min(currentHealth + healAmount, maxHealth);
+    }
+
+    [Button]
     protected virtual void Die()
     {
         Debug.Log(gameObject.name + " died.");
+
+        if(isPlayer)
+        {
+            //¿£µù¾À
+            return;
+        }
+
+        if(Stat.ItemDropPercentage >= Random.value)
+        {
+            Instantiate(Stat.Item, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 }

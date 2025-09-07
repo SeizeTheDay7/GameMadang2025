@@ -13,6 +13,6 @@ public class Obstacle : MonoBehaviour
 
     public bool CanJumpOn(float z, float jumpHeight)
     {
-        return height - z <= jumpHeight;
+        return landingPos.position.z - z <= jumpHeight;
     }
 }

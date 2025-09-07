@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public enum EnemyState
@@ -62,15 +63,15 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void OnEnable()
     {
-        chaseRangeCollider.OnCollisionEnter += AttackRangeCollider_OnCollisionEnter;
-        chaseRangeCollider.OnCollisionExit += AttackRangeCollider_OnCollisionExit;
+        /*  chaseRangeCollider.OnCollisionEnter += AttackRangeCollider_OnCollisionEnter;
+          chaseRangeCollider.OnCollisionExit += AttackRangeCollider_OnCollisionExit;*/
     }
 
 
     private void OnDisable()
     {
-        chaseRangeCollider.OnCollisionEnter -= AttackRangeCollider_OnCollisionEnter;
-        chaseRangeCollider.OnCollisionExit -= AttackRangeCollider_OnCollisionExit;
+        /*   chaseRangeCollider.OnCollisionEnter -= AttackRangeCollider_OnCollisionEnter;
+           chaseRangeCollider.OnCollisionExit -= AttackRangeCollider_OnCollisionExit;*/
     }
     private void AttackRangeCollider_OnCollisionEnter(Attributes character)
     {
@@ -93,7 +94,9 @@ public abstract class EnemyBase : MonoBehaviour
         if (attributes.Stat.AttackCooldownTime == null || attributes.Stat.IdleTimeWait == null)
             attributes.Stat.Init();
 
-        ChangeState(EnemyState.Patrol);
+        var allAttributes = FindObjectsByType<Attributes>(FindObjectsSortMode.None);
+        character = allAttributes.Where(x => x.CompareTag("Player")).FirstOrDefault();
+        ChangeState(EnemyState.Chase);
     }
 
     protected virtual void Update()
@@ -108,12 +111,12 @@ public abstract class EnemyBase : MonoBehaviour
         transform.position += speed * Time.deltaTime * moveDirection;
         spriteRenderer.flipX = moveDirection.x < 0;
 
-        float distanceToPoint = Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position);
-        if (distanceToPoint < 0.1f && currentState == EnemyState.Patrol)
-        {
-            StartCoroutine(CoIdle());
-            return;
-        }
+        /*      float distanceToPoint = Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position);
+              if (distanceToPoint < 0.1f && currentState == EnemyState.Patrol)
+              {
+                  StartCoroutine(CoIdle());
+                  return;
+              }*/
 
         CheckGround();
         CheckForObstacle();
@@ -121,12 +124,13 @@ public abstract class EnemyBase : MonoBehaviour
         if (currentState != EnemyState.Chase) return;
 
         float distanceToCharacter = Vector3.Distance(transform.position, character.Center);
-        if (distanceToCharacter > chaseRange * 1.15f)
-        {
-            StopAllCoroutines();
-            ChangeState(EnemyState.Patrol);
-        }
-        else if (distanceToCharacter < attackRange)
+        /*         if (distanceToCharacter > chaseRange * 1.15f)
+                {
+                    StopAllCoroutines();
+                    ChangeState(EnemyState.Patrol);
+                }
+                else*/
+        if (distanceToCharacter < attackRange)
         {
             ChangeState(EnemyState.Attack);
         }
@@ -190,7 +194,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected IEnumerator CoAttack()
     {
-        Vector2 direction = (character.Center - transform.position).normalized;
+        Vector3 direction = (character.Center - transform.position).normalized;
         var projectile = Instantiate(attributes.Stat.Projectile, transform.position, Quaternion.identity);
         projectile.transform.right = direction;
         projectile.Init(attributes);
@@ -233,19 +237,14 @@ public abstract class EnemyBase : MonoBehaviour
         }
         transform.position = landingPos;
 
-        if (lastState == EnemyState.Patrol)
-            currentPatrolIndex--;
-
         obstacle = null;
 
-        ChangeState(lastState);
+        ChangeState(EnemyState.Chase);
     }
 
     void CheckGround()
     {
-        if(currentState == EnemyState.Jump) return;
-
-        if (currentState == EnemyState.Chase && character.transform.position.z > transform.position.z) return;
+        if (currentState == EnemyState.Jump) return;
 
         if (currentState == EnemyState.Patrol && patrolPoints[currentPatrolIndex].transform.position.z > transform.position.z) return;
 
@@ -258,7 +257,6 @@ public abstract class EnemyBase : MonoBehaviour
             }
 
             landingPos = hit.point + moveDirection * .5f;
-            print(landingPos);
 
             ChangeState(EnemyState.Jump);
         }

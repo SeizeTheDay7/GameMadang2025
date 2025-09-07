@@ -16,3 +16,5 @@ MonoBehaviour:
   <AttackCooldown>k__BackingField: 1
   <IdleTime>k__BackingField: 1
   <Projectile>k__BackingField: {fileID: 5366237375957084325, guid: cccd523826f7962439322b44e763c0fa, type: 3}
+  <ItemDropPercentage>k__BackingField: 0.5
+  <Item>k__BackingField: {fileID: 53304676334792062, guid: e2f6f66b83c5c684fb4b043528b67397, type: 3}
