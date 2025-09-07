@@ -26,7 +26,16 @@ public class SceneChangeManager : MonoBehaviour
     public void LoadSceneAsync(int index)
     {
         SceneManager.LoadScene(index);
-        if (index != 0)
+        if (index == 1)
+        {
+            StartCoroutine(LoadUIScene());
+            return;
+        }
+    }
+    public void LoadSceneAsync(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+        if (sceneName != "LobbyScene" && sceneName != "GameOver")
         {
             StartCoroutine(LoadUIScene());
             return;

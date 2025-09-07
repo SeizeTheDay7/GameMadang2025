@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scenes/UIScene.unity
     guid: 7d2d11d1a426fc24a960a77f23372c4a
+  - enabled: 1
+    path: Assets/00_Scenes/GameOver.unity
+    guid: 61a7c6d7e662e8e4e9641d24adba1373
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
