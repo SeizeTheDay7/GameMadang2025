@@ -14,6 +14,7 @@ public class CharacterGravityAttack : MonoBehaviour
 
     [Header("Calculation")]
     GrabbableObject grabbedObj = null;
+    Vector3 targetPos;
 
     void Awake()
     {
@@ -35,22 +36,35 @@ public class CharacterGravityAttack : MonoBehaviour
         else if (releaseAttack && grabbedObj != null)
         {
             grabbedObj.Release();
+            grabbedObj = null;
         }
 
         bool pressAttack = attackAction.IsPressed();
-        if (pressAttack && grabbedObj)
+        if (pressAttack)
         {
-            grabbedObj.SetTarget(GetCurrentMousePos());
+            targetPos = GetCurrentMousePos();
+            targetPos.y = 0;
         }
+    }
+
+    void FixedUpdate()
+    {
+        grabbedObj?.FollowTarget(targetPos);
     }
 
     private GrabbableObject GetGrabbableObject()
     {
-        Collider2D hit = Physics2D.OverlapPoint(GetCurrentMousePos(), interactableLayer);
-        return hit?.GetComponent<GrabbableObject>();
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Debug.DrawRay(ray.origin, ray.direction * 30f, Color.red, 1f);
+
+        RaycastHit hit; if (Physics.Raycast(ray, out hit, 30f, interactableLayer))
+        {
+            return hit.collider.GetComponent<GrabbableObject>();
+        }
+        return null;
     }
 
-    private Vector2 GetCurrentMousePos()
+    private Vector3 GetCurrentMousePos()
     {
         return Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }

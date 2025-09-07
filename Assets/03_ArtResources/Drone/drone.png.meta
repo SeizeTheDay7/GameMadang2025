@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: efd4ed061525ae84b8d4eecd7db6f330
+guid: bcf88536fe3b34d4e9ef447bf548c7d7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2366647716231109767
-    second: "250907 \uBC30\uACBD_0"
+      213: 9148800814639467426
+    second: drone_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "250907 \uBC30\uACBD_0"
+      name: drone_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2014
-        height: 1080
+        width: 449
+        height: 255
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9732e8de07af72fd0800000000000000
-      internalID: -2366647716231109767
+      spriteID: 2abc3655ed117fe70800000000000000
+      internalID: 9148800814639467426
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "250907 \uBC30\uACBD_0": -2366647716231109767
+      drone_0: 9148800814639467426
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

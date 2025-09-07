@@ -7,13 +7,13 @@ public class Projectile : MonoBehaviour
     [Header(" - Projectile - ")]
     [SerializeField, Min(0)] float speed;
     [SerializeField, Min(0)] float lifetime;
-    [SerializeField] bool isMelee = false;
 
     Attributes owner;
 
     public void Init(Attributes attributes)
     {
         owner = attributes;
+        StartCoroutine(CoDie());
     }
 
     private void FixedUpdate()
@@ -23,21 +23,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.TryGetComponent(out Attributes target))
+        if (collision.TryGetComponent(out CharacterStat stat))
         {
-            if (isMelee && !collision.TryGetComponent(out Character character)) return;
-
-            if (!owner)
-            {
-                target.TakeDamage(10);
-                return;
-            }
-
-            if (target != owner)
-            {
-                target.TakeDamage(owner.Stat.Damage);
-                Destroy(gameObject);
-            }
+            stat.TakeDamage((int)owner.Stat.Damage);
         }
     }
 

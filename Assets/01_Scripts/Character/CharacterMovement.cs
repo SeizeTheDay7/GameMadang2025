@@ -48,6 +48,8 @@ public class CharacterMovement : MonoBehaviour
     float gravityDir = -1f;
     bool canReverseGravity = true;
     float colliderOffsetZ;
+    int jumpCount = 0;
+    bool canJump = true;
 
     void Awake()
     {
@@ -87,12 +89,12 @@ public class CharacterMovement : MonoBehaviour
             transform.localScale = new Vector3(moveInput < 0 ? -1 : 1, 1, transform.localScale.z);
 
             // Animator에 Blend Tree 추가하여 Idle, Walk, Run
-            if (pressRun)
-            {
-                anim.SetFloat("MoveValue", 1f);
-                velX = moveInput * moveSpeed * stat.moveSpeedMultiplier * runMultiplier;
-            }
-            else
+            // if (pressRun)
+            // {
+            //     anim.SetFloat("MoveValue", 1f);
+            //     velX = moveInput * moveSpeed * stat.moveSpeedMultiplier * runMultiplier;
+            // }
+            // else
             {
                 anim.SetFloat("MoveValue", 0.5f);
                 velX = moveInput * moveSpeed * stat.moveSpeedMultiplier;
@@ -124,18 +126,23 @@ public class CharacterMovement : MonoBehaviour
                 velY = gravityDir < 0 ? -reverseGravityInitialSpeed : reverseGravityInitialSpeed; // 땅에 붙어있을 때 중력 작용 바로 느껴지게
                 transform.position += Vector3.forward * (colliderOffsetZ * 2 * rgInput.y);
             }
+
+            return;
         }
 
-        if (pressJump && grounded)
+        if (grounded && canJump) jumpCount = stat.maxJump;
+
+        if (pressJump && canJump && jumpCount > 0)
         {
+            jumpCount--;
             velY = jumpPower * gravityDir * -1;
+            StartCoroutine(CooldownJump());
+            return;
         }
-        else
-        {
-            velY += gravity * Time.deltaTime * gravityDir;
-            float maxFallSpeed_G = maxFallSpeed * gravityDir;
-            velY = gravityDir < 0 ? Mathf.Max(velY, maxFallSpeed_G) : Mathf.Min(maxFallSpeed_G, velY);
-        }
+
+        velY += gravity * Time.deltaTime * gravityDir;
+        float maxFallSpeed_G = maxFallSpeed * gravityDir;
+        velY = gravityDir < 0 ? Mathf.Max(velY, maxFallSpeed_G) : Mathf.Min(maxFallSpeed_G, velY);
     }
 
     private IEnumerator CooldownRG()
@@ -154,7 +161,6 @@ public class CharacterMovement : MonoBehaviour
         Debug.DrawRay(transform.position + groundCheckOffset, checkDir * groundCheckLength, Color.red);
         if (leftCheck || rightCheck)
         {
-            Debug.Log("Grounded!");
             anim.SetBool("Grounded", true);
             grounded = true;
         }
@@ -163,5 +169,12 @@ public class CharacterMovement : MonoBehaviour
             anim.SetBool("Grounded", false);
             grounded = false;
         }
+    }
+
+    private IEnumerator CooldownJump()
+    {
+        canJump = false;
+        yield return new WaitForSeconds(0.1f);
+        canJump = true;
     }
 }

@@ -6,12 +6,12 @@ public class GrabbableObject : MonoBehaviour
     [Header(" - GrabbableObject - ")]
 
     [Header("Components")]
-    Rigidbody2D body;
-    TargetJoint2D joint;
-    CharacterStat characterStat;
+    public Rigidbody body { get; private set; }
+
+    [Header("Parameters")]
+    [SerializeField] float followSpeed = 10f;
 
     [Header("Calculation")]
-    float initGrav;
     float attackMinSpeed;
     float attackDamage;
     Attributes owner;
@@ -19,28 +19,27 @@ public class GrabbableObject : MonoBehaviour
     void Awake()
     {
         owner = GetComponent<Attributes>();
-        joint = GetComponent<TargetJoint2D>();
-        body = GetComponent<Rigidbody2D>();
-        initGrav = body.gravityScale;
+        body = GetComponent<Rigidbody>();
     }
 
     public void Grab(CharacterStat stat)
     {
         attackMinSpeed = stat.gravAttackMinSpeed;
         attackDamage = stat.gravAttackDamage;
-        body.gravityScale = 0;
-        joint.enabled = true;
+        body.useGravity = false;
+    }
+
+    public void FollowTarget(Vector3 targetPos)
+    {
+        Vector3 direction = (targetPos - transform.position).normalized;
+        direction.y = 0;
+        float distance = Vector3.Distance(transform.position, targetPos);
+        body.linearVelocity = direction * distance * followSpeed;
     }
 
     public void Release()
     {
-        body.gravityScale = initGrav;
-        joint.enabled = false;
-    }
-
-    public void SetTarget(Vector2 target)
-    {
-        joint.target = target;
+        body.useGravity = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
