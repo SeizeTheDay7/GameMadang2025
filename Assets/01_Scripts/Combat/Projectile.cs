@@ -25,8 +25,6 @@ public class Projectile : MonoBehaviour
     {
         if (collision.TryGetComponent(out Attributes target))
         {
-            if (isMelee && !collision.TryGetComponent(out Character character)) return;
-
             if (!owner && collision.CompareTag("Player"))
             {
                 target.TakeDamage(10);

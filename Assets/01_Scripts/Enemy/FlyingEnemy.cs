@@ -7,6 +7,7 @@ public class FlyingEnemy : MonoBehaviour
     [Header(" - Attributes - ")]
     protected Attributes attributes;
     [SerializeField] protected float attackRange;
+    [SerializeField] bool isBoss = false;
 
     [Header(" - State - ")]
     [SerializeField] protected EnemyState currentState = EnemyState.Idle;
@@ -144,6 +145,7 @@ public class FlyingEnemy : MonoBehaviour
                 agent.speed = patrolSpeed * 1.5f;
                 break;
             case EnemyState.Attack:
+                if (isBoss) return;
                 agent.SetDestination(transform.position);
                 Attack();
                 break;
