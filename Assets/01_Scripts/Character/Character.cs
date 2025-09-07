@@ -4,6 +4,7 @@ using TMPro;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
+using System.Globalization;
 
 public class Character : MonoBehaviour
 {
@@ -61,12 +62,16 @@ public class Character : MonoBehaviour
 
         for (int i = 1; i < lines.Length; i++)
         {
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
             string[] values = lines[i].Split(',');
             string type = values[0];
             for (int j = 1; j < values.Length; j++)
             {
                 if (statUpInfoDict.ContainsKey(type))
+                {
+                    if (string.IsNullOrWhiteSpace(values[j])) continue;
                     statUpInfoDict[type].Add(float.Parse(values[j]));
+                }
                 else
                     statUpInfoDict[type] = new List<float>() { float.Parse(values[j]) };
             }
@@ -95,19 +100,20 @@ public class Character : MonoBehaviour
     void Update()
     {
         debugText.text =
+            $"CurrentHealth: {stat.currentHealth}\n" +
             $"MaxHealth: {stat.maxHealth}\n" +
             $"CurrentExp: {stat.currentExp}\n" +
             $"CurrentLevel: {stat.currentLevel}\n" +
             $"CurrentStatLevels: {string.Join(", ", stat.currentStatLevels)}\n" +
             $"MaxJump: {stat.maxJump}\n" +
-            $"RunningSpeed: {stat.moveSpeed}\n" +
+            $"RunningSpeed: {stat.moveSpeedMultiplier}\n" +
             $"ReverseGravCoolTime: {stat.reverseGravCoolTime}\n" +
             $"ReverseGravFallSpeed: {stat.reverseGravFallSpeed}\n" +
             $"HeartDropRate: {stat.heartDropRate}\n" +
             $"InvinsibleTime: {stat.invinsibleTime}\n" +
             $"DodgeRate: {stat.dodgeRate}\n" +
             $"GravAttackDamage: {stat.gravAttackDamage}\n" +
-            $"GravAttackMinSpeed: {stat.GravAttackMinSpeed}\n" +
+            $"GravAttackMinSpeed: {stat.gravAttackMinSpeed}\n" +
             $"BoxSpawnCoolTime: {stat.boxSpawnCoolTime}\n" +
             $"PortalSpawnCoolTime: {stat.portalSpawnCoolTime}\n";
         // $"ThrowableMonster: {stat.throwableMonster}\n" +
@@ -215,8 +221,8 @@ public class Character : MonoBehaviour
             case StatType.MaxJump:
                 stat.maxJump = (int)data;
                 break;
-            case StatType.MovementSpeed:
-                stat.moveSpeed = data;
+            case StatType.MoveSpeedMultiplier:
+                stat.moveSpeedMultiplier = data;
                 break;
             case StatType.ReverseGravCoolTime:
                 stat.reverseGravCoolTime = data;
@@ -237,7 +243,7 @@ public class Character : MonoBehaviour
                 stat.gravAttackDamage = data;
                 break;
             case StatType.GravAttackMinSpeed:
-                stat.GravAttackMinSpeed = data;
+                stat.gravAttackMinSpeed = data;
                 break;
             case StatType.BoxSpawnCoolTime:
                 stat.boxSpawnCoolTime = data;

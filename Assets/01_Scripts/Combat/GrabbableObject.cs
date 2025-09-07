@@ -1,25 +1,46 @@
+using System;
 using UnityEngine;
 
 public class GrabbableObject : MonoBehaviour
 {
     [Header(" - GrabbableObject - ")]
-    [SerializeField] float attackableSpeed = 10f;
-    [SerializeField] GameObject prefab;
-    Vector3 initPos;
-    GrabbableObjectManager manager;
-    Attributes owner;
+
+    [Header("Components")]
     Rigidbody2D body;
+    TargetJoint2D joint;
+    CharacterStat characterStat;
+
+    [Header("Calculation")]
+    float initGrav;
+    float attackMinSpeed;
+    float attackDamage;
+    Attributes owner;
 
     void Awake()
     {
-        initPos = transform.position;
         owner = GetComponent<Attributes>();
+        joint = GetComponent<TargetJoint2D>();
         body = GetComponent<Rigidbody2D>();
+        initGrav = body.gravityScale;
     }
 
-    public void Init(GrabbableObjectManager mgr)
+    public void Grab(CharacterStat stat)
     {
-        manager = mgr;
+        attackMinSpeed = stat.gravAttackMinSpeed;
+        attackDamage = stat.gravAttackDamage;
+        body.gravityScale = 0;
+        joint.enabled = true;
+    }
+
+    public void Release()
+    {
+        body.gravityScale = initGrav;
+        joint.enabled = false;
+    }
+
+    public void SetTarget(Vector2 target)
+    {
+        joint.target = target;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,23 +49,19 @@ public class GrabbableObject : MonoBehaviour
         {
             if (!owner)
             {
+                Debug.LogError("No Attributes component found in the GrabbableObject.");
                 target.TakeDamage(10);
                 return;
             }
 
             bool isEnemy = target.transform.TryGetComponent(out EnemyBase enemy);
-            bool fastEnough = body.linearVelocity.magnitude >= attackableSpeed;
+            bool fastEnough = body.linearVelocity.magnitude >= attackMinSpeed;
             // Debug.Log("(Collision occured) Speed of thrown object : " + body.linearVelocity.magnitude);
 
             if (isEnemy && fastEnough)
             {
-                target.TakeDamage(owner.Stat.Damage);
+                target.TakeDamage(attackDamage);
             }
         }
-    }
-
-    void OnDisable()
-    {
-        manager.QueueRespawn(transform, initPos);
     }
 }

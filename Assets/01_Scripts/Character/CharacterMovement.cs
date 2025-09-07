@@ -17,7 +17,7 @@ public class CharacterMovement : MonoBehaviour
     SpriteRenderer sr;
 
     [Header("Move Parameters")]
-    // [SerializeField] float moveSpeed = 7.5f;
+    [SerializeField] float moveSpeed = 7.5f;
     [SerializeField] float runMultiplier = 1.5f;
 
     [Header("Jump Parameters")]
@@ -91,12 +91,12 @@ public class CharacterMovement : MonoBehaviour
             if (pressRun)
             {
                 anim.SetFloat("MoveValue", 1f);
-                velX = moveInput * stat.moveSpeed * runMultiplier;
+                velX = moveInput * moveSpeed * stat.moveSpeedMultiplier * runMultiplier;
             }
             else
             {
                 anim.SetFloat("MoveValue", 0.5f);
-                velX = moveInput * stat.moveSpeed;
+                velX = moveInput * moveSpeed * stat.moveSpeedMultiplier;
             }
         }
         else
@@ -112,9 +112,8 @@ public class CharacterMovement : MonoBehaviour
 
         bool pressJump = jumpAction.triggered;
         bool pressRG = reverseGravityAction.triggered;
-        bool platformExists = CheckPlatform();
 
-        if (pressRG && platformExists && canReverseGravity)
+        if (pressRG && canReverseGravity)
         {
             Vector2 rgInput = reverseGravityAction.ReadValue<Vector2>();
             transform.localScale = new Vector3(transform.localScale.x, -rgInput.y, 1);
@@ -140,18 +139,10 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private bool CheckPlatform()
-    {
-        Vector2 checkDir = gravityDir > 0 ? Vector2.down : Vector2.up;
-        bool platformCheck = Physics2D.Raycast(transform.position, checkDir, reverseGravityPlatformCheckLength, groundLayer);
-        Debug.DrawRay(transform.position, checkDir * reverseGravityPlatformCheckLength, Color.blue);
-        return platformCheck;
-    }
-
     private IEnumerator CooldownRG()
     {
         canReverseGravity = false;
-        yield return new WaitForSeconds(reverseGravityCoolTime);
+        yield return new WaitForSeconds(stat.reverseGravCoolTime);
         canReverseGravity = true;
     }
 

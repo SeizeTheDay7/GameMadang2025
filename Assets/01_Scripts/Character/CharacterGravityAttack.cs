@@ -5,17 +5,15 @@ using UnityEngine.InputSystem;
 public class CharacterGravityAttack : MonoBehaviour
 {
     [Header("Components")]
+    [SerializeField] CharacterStat stat;
     PlayerInput playerInput;
     InputAction attackAction; // 마우스 왼쪽 버튼 할당
 
     [Header("Parameters")]
-    [SerializeField] float cancelDistance = 5f; // 홀드가 취소되는 거리
     [SerializeField] LayerMask interactableLayer;
 
     [Header("Calculation")]
-    Transform grabbedObject = null;
-    TargetJoint2D targetJoint;
-    float prevGravityScale;
+    GrabbableObject grabbedObj = null;
 
     void Awake()
     {
@@ -30,47 +28,26 @@ public class CharacterGravityAttack : MonoBehaviour
 
         if (triggerAttack)
         {
-            grabbedObject = GetGravityInteractable();
-
-            if (grabbedObject == null) return;
-
-            Rigidbody2D grabbedObjectRB = grabbedObject.GetComponent<Rigidbody2D>();
-            prevGravityScale = grabbedObjectRB.gravityScale;
-            grabbedObjectRB.gravityScale = 0;
-
-            targetJoint = grabbedObject.GetComponent<TargetJoint2D>();
-            targetJoint.enabled = true;
+            grabbedObj = GetGrabbableObject();
+            if (grabbedObj == null) return;
+            grabbedObj.Grab(stat);
         }
-        else if (releaseAttack && grabbedObject != null)
+        else if (releaseAttack && grabbedObj != null)
         {
-            ReleaseAttack();
+            grabbedObj.Release();
         }
 
-        Vector2 mousePos = GetCurrentMousePos();
         bool pressAttack = attackAction.IsPressed();
-        bool tooFarFromCharacter = Vector2.Distance(transform.position, mousePos) > cancelDistance;
-
-        if (pressAttack)
+        if (pressAttack && grabbedObj)
         {
-            if (grabbedObject == null) return;
-            if (tooFarFromCharacter) { ReleaseAttack(); return; }
-
-            targetJoint.target = mousePos;
+            grabbedObj.SetTarget(GetCurrentMousePos());
         }
     }
 
-    private void ReleaseAttack()
-    {
-        grabbedObject.GetComponent<Rigidbody2D>().gravityScale = prevGravityScale;
-        targetJoint.enabled = false;
-        targetJoint = null;
-        grabbedObject = null;
-    }
-
-    private Transform GetGravityInteractable()
+    private GrabbableObject GetGrabbableObject()
     {
         Collider2D hit = Physics2D.OverlapPoint(GetCurrentMousePos(), interactableLayer);
-        return hit?.transform;
+        return hit?.GetComponent<GrabbableObject>();
     }
 
     private Vector2 GetCurrentMousePos()

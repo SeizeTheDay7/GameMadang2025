@@ -1,20 +1,20 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Collider))]
 public class ChaseRangeCollider : MonoBehaviour
 {
     public Action<Attributes> OnCollisionEnter;
     public Action<Attributes> OnCollisionExit;
     public void SetRadius(float radius)
     {
-        if (TryGetComponent<CircleCollider2D>(out var collider))
+        if (TryGetComponent<SphereCollider>(out var collider))
         {
             collider.radius = radius;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.TryGetComponent(out Attributes attributes))
         {
@@ -25,7 +25,7 @@ public class ChaseRangeCollider : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.TryGetComponent(out Attributes attributes))
         {

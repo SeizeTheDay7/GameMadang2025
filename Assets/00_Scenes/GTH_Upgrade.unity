@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c2b965dba81ec429107356cab43352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
   currentExp: 0
   currentLevel: 0
   currentStatLevels: 
@@ -290,6 +291,14 @@ MonoBehaviour:
   heartDropRate: 10
   invinsibleTime: 1.5
   dodgeRate: 2
+  moveSpeedMultiplier: 0
+  reverseGravCoolTime: 0
+  reverseGravFallSpeed: 0
+  maxJump: 2
+  gravAttackDamage: 0
+  gravAttackMinSpeed: 0
+  boxSpawnCoolTime: 0
+  portalSpawnCoolTime: 0
 --- !u!1001 &112471923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4553,6 +4562,10 @@ PrefabInstance:
       propertyPath: 'cardSOs.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: 77478feea4a7f2c4b9637c85cbd569c7, type: 2}
+    - target: {fileID: 2104342405702242407, guid: f1ca58ee20259d74ba4822d5b237d4c6, type: 3}
+      propertyPath: stat
+      value: 
+      objectReference: {fileID: 76412021}
     - target: {fileID: 2207143903657206211, guid: f1ca58ee20259d74ba4822d5b237d4c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.44
@@ -4593,6 +4606,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4577991097826138842, guid: f1ca58ee20259d74ba4822d5b237d4c6, type: 3}
+      propertyPath: stat
+      value: 
+      objectReference: {fileID: 76412021}
     - target: {fileID: 9006626739395395678, guid: f1ca58ee20259d74ba4822d5b237d4c6, type: 3}
       propertyPath: m_Name
       value: Character
