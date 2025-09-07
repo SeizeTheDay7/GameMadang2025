@@ -34,8 +34,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float chaseRange;
     int currentPatrolIndex = 0;
 
-    [SerializeField] float jumpHeight;
-    Obstacle obstacle;
+    JumpLink link;
     Vector3 landingPos;
 
     [Header(" - Rendering - ")]
@@ -44,8 +43,8 @@ public abstract class EnemyBase : MonoBehaviour
     [Header(" - Animation - ")]
     [SerializeField] protected Animator animator;
 
-    [Header(" - Debug - ")]
     [SerializeField] protected Attributes character;
+    public void SetCharacter(Attributes character) => this.character = character;
 
     protected virtual void Awake()
     {
@@ -62,15 +61,15 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void OnEnable()
     {
-        chaseRangeCollider.OnCollisionEnter += AttackRangeCollider_OnCollisionEnter;
-        chaseRangeCollider.OnCollisionExit += AttackRangeCollider_OnCollisionExit;
+        /*  chaseRangeCollider.OnCollisionEnter += AttackRangeCollider_OnCollisionEnter;
+          chaseRangeCollider.OnCollisionExit += AttackRangeCollider_OnCollisionExit;*/
     }
 
 
     private void OnDisable()
     {
-        chaseRangeCollider.OnCollisionEnter -= AttackRangeCollider_OnCollisionEnter;
-        chaseRangeCollider.OnCollisionExit -= AttackRangeCollider_OnCollisionExit;
+        /*   chaseRangeCollider.OnCollisionEnter -= AttackRangeCollider_OnCollisionEnter;
+           chaseRangeCollider.OnCollisionExit -= AttackRangeCollider_OnCollisionExit;*/
     }
     private void AttackRangeCollider_OnCollisionEnter(Attributes character)
     {
@@ -93,7 +92,12 @@ public abstract class EnemyBase : MonoBehaviour
         if (attributes.Stat.AttackCooldownTime == null || attributes.Stat.IdleTimeWait == null)
             attributes.Stat.Init();
 
-        ChangeState(EnemyState.Patrol);
+        Vector3 lookDirection = character.Center - transform.position;
+        lookDirection.z = 0;
+        if (Physics.Raycast(transform.position + Vector3.forward * .5f, lookDirection, out RaycastHit hit, 100f, 1 << 8))
+            hit.collider.TryGetComponent(out link);
+
+        ChangeState(EnemyState.Chase);
     }
 
     protected virtual void Update()
@@ -108,25 +112,27 @@ public abstract class EnemyBase : MonoBehaviour
         transform.position += speed * Time.deltaTime * moveDirection;
         spriteRenderer.flipX = moveDirection.x < 0;
 
-        float distanceToPoint = Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position);
-        if (distanceToPoint < 0.1f && currentState == EnemyState.Patrol)
-        {
-            StartCoroutine(CoIdle());
-            return;
-        }
+        /*      float distanceToPoint = Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position);
+              if (distanceToPoint < 0.1f && currentState == EnemyState.Patrol)
+              {
+                  StartCoroutine(CoIdle());
+                  return;
+              }*/
 
         CheckGround();
-        CheckForObstacle();
+
+
 
         if (currentState != EnemyState.Chase) return;
 
         float distanceToCharacter = Vector3.Distance(transform.position, character.Center);
-        if (distanceToCharacter > chaseRange * 1.15f)
-        {
-            StopAllCoroutines();
-            ChangeState(EnemyState.Patrol);
-        }
-        else if (distanceToCharacter < attackRange)
+        /*         if (distanceToCharacter > chaseRange * 1.15f)
+                {
+                    StopAllCoroutines();
+                    ChangeState(EnemyState.Patrol);
+                }
+                else*/
+        if (distanceToCharacter < attackRange)
         {
             ChangeState(EnemyState.Attack);
         }
@@ -160,7 +166,7 @@ public abstract class EnemyBase : MonoBehaviour
                 StartCoroutine(CoChase());
                 break;
             case EnemyState.Jump:
-                StartCoroutine(CoJump());
+                moveDirection = Vector3.zero;
                 break;
             case EnemyState.Attack:
                 moveDirection = Vector3.zero;
@@ -190,10 +196,13 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected IEnumerator CoAttack()
     {
-        Vector2 direction = (character.Center - transform.position).normalized;
+        Vector3 direction = (character.Center - transform.position).normalized;
         var projectile = Instantiate(attributes.Stat.Projectile, transform.position, Quaternion.identity);
         projectile.transform.right = direction;
         projectile.Init(attributes);
+
+        spriteRenderer.flipX = direction.x < 0;
+
         yield return attributes.Stat.AttackCooldownTime;
         Attack();
     }
@@ -209,16 +218,53 @@ public abstract class EnemyBase : MonoBehaviour
     {
         while (currentState == EnemyState.Chase)
         {
-            moveDirection = (character.Center - transform.position).normalized;
+            Vector3 lookDirection = moveDirection;
+            if (link)
+            {
+                lookDirection = (link.transform.position - transform.position).normalized;
+                lookDirection.z = 0;
+                moveDirection = lookDirection;
+            }
+
+            if (Mathf.Abs(transform.position.z - character.transform.position.z) > 1)
+            {
+                if (Physics.Raycast(transform.position + Vector3.forward * .5f, lookDirection, out RaycastHit hit, 100f, 1 << 8))
+                {
+                    if (!link && hit.collider.TryGetComponent(out link))
+                    {
+                        if (transform.position.z > character.transform.position.z && link.downJumpLink)
+                        {
+                            moveDirection = (hit.point - transform.position).normalized;
+                        }
+                        else if (transform.position.z < character.transform.position.z && link.upJumpLink)
+                        {
+                            moveDirection = (hit.point - transform.position).normalized;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                moveDirection = (character.Center - transform.position).normalized;
+            }
             moveDirection.z = 0;
+
             yield return null;
         }
     }
 
-    protected virtual IEnumerator CoJump()
+    public virtual void Jump(Vector3 destination)
+    {
+        if (currentState == EnemyState.Jump) return;
+
+        ChangeState(EnemyState.Jump);
+        StartCoroutine(CoJump(destination));
+    }
+
+    protected virtual IEnumerator CoJump(Vector3 destination)
     {
         Vector3 startPos = transform.position;
-        landingPos = obstacle ? obstacle.GetLandingPos().position : landingPos;
+        landingPos = destination;
         float duration = 0.5f; // 점프 시간 (조절 가능)
         float elapsed = 0f;
         moveDirection = Vector3.zero;
@@ -226,29 +272,24 @@ public abstract class EnemyBase : MonoBehaviour
         while (elapsed < duration)
         {
             float t = elapsed / duration;
-            Vector3 parabola = Vector3.Lerp(startPos, landingPos, t) + 1.1f * Mathf.Sin(Mathf.PI * t) * Vector3.forward;
+            Vector3 parabola = Vector3.Lerp(startPos, landingPos, t) + 1.3f * Mathf.Sin(Mathf.PI * t) * Vector3.forward;
             transform.position = parabola;
             elapsed += Time.deltaTime;
             yield return null;
         }
         transform.position = landingPos;
 
-        if (lastState == EnemyState.Patrol)
-            currentPatrolIndex--;
+        Vector3 lookDirection = character.Center - transform.position;
+        lookDirection.z = 0;
+        if (Physics.Raycast(transform.position + Vector3.forward * .5f, lookDirection, out RaycastHit hit, 100f, 1 << 8))
+            hit.collider.TryGetComponent(out link);
 
-        obstacle = null;
-
-        ChangeState(lastState);
+        ChangeState(EnemyState.Chase);
     }
 
     void CheckGround()
     {
-        if(currentState == EnemyState.Jump) return;
-
-        if (currentState == EnemyState.Chase && character.transform.position.z > transform.position.z) return;
-
-        if (currentState == EnemyState.Patrol && patrolPoints[currentPatrolIndex].transform.position.z > transform.position.z) return;
-
+        if (currentState == EnemyState.Jump) return;
 
         if (Physics.Raycast(transform.position + Vector3.forward, Vector3.back, out RaycastHit hit, 10f, 1 << 8 | 1 << 6))
         {
@@ -258,26 +299,11 @@ public abstract class EnemyBase : MonoBehaviour
             }
 
             landingPos = hit.point + moveDirection * .5f;
-            print(landingPos);
 
-            ChangeState(EnemyState.Jump);
+            Jump(landingPos);
         }
     }
 
-    void CheckForObstacle()
-    {
-        if (Physics.Raycast(transform.position + Vector3.forward * .5f, moveDirection, out RaycastHit hit, 0.5f, 1 << 8))
-        {
-            if (hit.collider.TryGetComponent(out obstacle))
-            {
-                if (obstacle.CanJumpOn(transform.position.z, jumpHeight))
-                {
-                    lastState = currentState;
-                    ChangeState(EnemyState.Jump);
-                }
-            }
-        }
-    }
 
     bool IsLookingAtPlayer()
     {

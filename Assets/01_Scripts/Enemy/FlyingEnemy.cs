@@ -15,10 +15,10 @@ public class FlyingEnemy : MonoBehaviour
     [Header(" - Locomotion - ")]
     NavMeshAgent agent;
     [SerializeField] protected float patrolSpeed;
-    [SerializeField] protected PatrolPoint[] patrolPoints;
-    [SerializeField] protected ChaseRangeCollider chaseRangeCollider;
-    [SerializeField] protected float chaseRange;
-    int currentPatrolIndex = 0;
+    /*    [SerializeField] protected PatrolPoint[] patrolPoints;
+        [SerializeField] protected ChaseRangeCollider chaseRangeCollider;
+        [SerializeField] protected float chaseRange;
+        int currentPatrolIndex = 0;*/
 
     [Header(" - Rendering - ")]
     [SerializeField] protected SpriteRenderer spriteRenderer;
@@ -26,56 +26,57 @@ public class FlyingEnemy : MonoBehaviour
     [Header(" - Animation - ")]
     [SerializeField] protected Animator animator;
 
-    [Header(" - Debug - ")]
+    [Header(" - Character - ")]
     [SerializeField] protected Attributes character;
+    public void SetCharacter(Attributes character) => this.character = character;
 
     protected virtual void Awake()
     {
         TryGetComponent(out attributes);
         TryGetComponent(out agent);
 
-        if (!chaseRangeCollider)
-            chaseRangeCollider = GetComponentInChildren<ChaseRangeCollider>();
+        /*        if (!chaseRangeCollider)
+                    chaseRangeCollider = GetComponentInChildren<ChaseRangeCollider>();*/
 
         if (!spriteRenderer)
             TryGetComponent(out spriteRenderer);
 
-        chaseRangeCollider.SetRadius(chaseRange);
+        //  chaseRangeCollider.SetRadius(chaseRange);
     }
 
-    private void OnEnable()
-    {
-        chaseRangeCollider.OnCollisionEnter += AttackRangeCollider_OnCollisionEnter;
-        chaseRangeCollider.OnCollisionExit += AttackRangeCollider_OnCollisionExit;
-    }
-    private void OnDisable()
-    {
-        chaseRangeCollider.OnCollisionEnter -= AttackRangeCollider_OnCollisionEnter;
-        chaseRangeCollider.OnCollisionExit -= AttackRangeCollider_OnCollisionExit;
-    }
+    /*    private void OnEnable()
+        {
+            chaseRangeCollider.OnCollisionEnter += AttackRangeCollider_OnCollisionEnter;
+            chaseRangeCollider.OnCollisionExit += AttackRangeCollider_OnCollisionExit;
+        }
+        private void OnDisable()
+        {
+            chaseRangeCollider.OnCollisionEnter -= AttackRangeCollider_OnCollisionEnter;
+            chaseRangeCollider.OnCollisionExit -= AttackRangeCollider_OnCollisionExit;
+        }*/
 
-    private void AttackRangeCollider_OnCollisionEnter(Attributes character)
-    {
-        this.character = character;
-        nearPlayer = true;
+    /*    private void AttackRangeCollider_OnCollisionEnter(Attributes character)
+        {
+            this.character = character;
+            nearPlayer = true;
 
-        if (!IsLookingAtPlayer()) return;
+            if (!IsLookingAtPlayer()) return;
 
-        ChangeState(EnemyState.Chase);
-    }
+            ChangeState(EnemyState.Chase);
+        }
 
-    private void AttackRangeCollider_OnCollisionExit(Attributes attributes)
-    {
-        nearPlayer = false;
-        ChangeState(EnemyState.Patrol);
-    }
+        private void AttackRangeCollider_OnCollisionExit(Attributes attributes)
+        {
+            nearPlayer = false;
+            ChangeState(EnemyState.Patrol);
+        }*/
 
     private void Start()
     {
         if (attributes.Stat.AttackCooldownTime == null || attributes.Stat.IdleTimeWait == null)
             attributes.Stat.Init();
 
-        ChangeState(EnemyState.Patrol);
+        ChangeState(EnemyState.Chase);
     }
 
     protected virtual void Update()
@@ -97,18 +98,21 @@ public class FlyingEnemy : MonoBehaviour
             agent.SetDestination(character.transform.position);
 
             float distanceToCharacter = Vector3.Distance(transform.position, character.transform.position);
-            if (distanceToCharacter > chaseRange * 1.15f)
-            {
-                StopAllCoroutines();
-                ChangeState(EnemyState.Patrol);
-            }
-            else if (distanceToCharacter < attackRange)
-            {
-                ChangeState(EnemyState.Attack);
-            }
-        }
 
-        CheckCharacterNotice();
+            /*            if (distanceToCharacter > chaseRange * 1.15f)
+                        {
+                            StopAllCoroutines();
+                            ChangeState(EnemyState.Patrol);
+                        }*/
+            if (distanceToCharacter < attackRange)
+            {
+                if (!Physics.Raycast(transform.position, character.transform.position - transform.position, out RaycastHit hit, attackRange, 1 << 6))
+                {
+                    ChangeState(EnemyState.Attack);
+                }
+            }
+            CheckCharacterNotice();
+        }
     }
 
 
@@ -132,9 +136,9 @@ public class FlyingEnemy : MonoBehaviour
                 break;
             case EnemyState.Patrol:
                 agent.speed = patrolSpeed;
-                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-                PatrolPoint patrolPoint = patrolPoints[currentPatrolIndex];
-                agent.SetDestination(patrolPoint.transform.position);
+                /*                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+                                PatrolPoint patrolPoint = patrolPoints[currentPatrolIndex];
+                                agent.SetDestination(patrolPoint.transform.position);*/
                 break;
             case EnemyState.Chase:
                 agent.speed = patrolSpeed * 1.5f;

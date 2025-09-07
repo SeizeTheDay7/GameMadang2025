@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     public void Init(Attributes attributes)
     {
         owner = attributes;
+        Destroy(gameObject, lifetime);
     }
 
     private void FixedUpdate()
@@ -27,13 +28,13 @@ public class Projectile : MonoBehaviour
         {
             if (isMelee && !collision.TryGetComponent(out Character character)) return;
 
-            if (!owner)
+            if (!owner && collision.CompareTag("Player"))
             {
                 target.TakeDamage(10);
                 return;
             }
 
-            if (target != owner)
+            if (target != owner && collision.CompareTag("Player"))
             {
                 target.TakeDamage(owner.Stat.Damage);
                 Destroy(gameObject);
