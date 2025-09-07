@@ -1,51 +1,45 @@
-using EditorAttributes;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChangeManager : MonoBehaviour
 {
+    public static SceneChangeManager Instance { get; private set; }
+
     [SerializeField] private string loadingSceneName = "LoadingScene";
 
     private void Awake()
     {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(Instance.gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 
     public void LoadSceneAsync(int index)
     {
-        StartCoroutine(LoadSceneAsyncCoroutine(index));
+        SceneManager.LoadScene(index);
+        if (index != 0)
+        {
+            StartCoroutine(LoadUIScene());
+            return;
+        }
     }
 
-    private IEnumerator LoadSceneAsyncCoroutine(int index)
+    IEnumerator LoadUIScene()
     {
-        AsyncOperation loadingSceneOp = SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Single);
-        while (!loadingSceneOp.isDone)
+        AsyncOperation uiSceneOp = SceneManager.LoadSceneAsync("UIScene", LoadSceneMode.Additive);
+        uiSceneOp.allowSceneActivation = true;
+        while (!uiSceneOp.isDone)
         {
             yield return null;
-        }
-
-        AsyncOperation targetSceneOp = SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
-        targetSceneOp.allowSceneActivation = false;
-
-        while (targetSceneOp.progress < 0.9f)
-        {
-            print(targetSceneOp.progress);
-            yield return null;
-        }
-
-        targetSceneOp.allowSceneActivation = true;
-        while (!targetSceneOp.isDone)
-        {
-            yield return null;
-        }
-
-        SceneManager.UnloadSceneAsync(loadingSceneName);
-
-        Scene targetScene = SceneManager.GetSceneByBuildIndex(index);
-        if (targetScene.IsValid())
-        {
-            SceneManager.SetActiveScene(targetScene);
         }
     }
 }

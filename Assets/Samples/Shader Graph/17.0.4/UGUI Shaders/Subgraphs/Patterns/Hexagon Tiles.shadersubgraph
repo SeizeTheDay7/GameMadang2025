@@ -3166,10 +3166,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1645.4998779296875,
-            "y": 7.000043869018555,
-            "width": 92.4998779296875,
-            "height": 33.99998474121094
+            "x": -1666.0,
+            "y": -1.0000091791152955,
+            "width": 93.0,
+            "height": 33.999996185302737
         }
     },
     "m_Slots": [
@@ -5615,7 +5615,7 @@
     },
     "m_Name": "Add",
     "m_DrawState": {
-        "m_Expanded": false,
+        "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
             "x": 983.5,
@@ -5641,7 +5641,7 @@
         "plus"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {

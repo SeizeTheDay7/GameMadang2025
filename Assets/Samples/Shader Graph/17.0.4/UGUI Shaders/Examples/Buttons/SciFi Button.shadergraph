@@ -161,6 +161,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "6f9ec4e1194545c2a0765dbc080233b4"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "1795d618ff9042e7bf5dcb0540585086"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "d42be8f3572240a0b5a180baf6a04d50"
                 },
                 "m_SlotId": 0
@@ -744,15 +758,6 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "SurfaceDescription.BaseColor"
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.Rendering.Canvas.ShaderGraph.CanvasData",
-    "m_ObjectId": "6c72ac960045452fa183f560dd1e9d9d",
-    "m_Version": 0,
-    "m_AlphaClip": false,
-    "m_DisableTint": false
 }
 
 {
