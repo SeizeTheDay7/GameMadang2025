@@ -45,8 +45,8 @@ public abstract class EnemyBase : MonoBehaviour
     [Header(" - Animation - ")]
     [SerializeField] protected Animator animator;
 
-    [Header(" - Debug - ")]
     [SerializeField] protected Attributes character;
+    public void SetCharacter(Attributes character) => this.character = character;
 
     protected virtual void Awake()
     {
@@ -94,8 +94,6 @@ public abstract class EnemyBase : MonoBehaviour
         if (attributes.Stat.AttackCooldownTime == null || attributes.Stat.IdleTimeWait == null)
             attributes.Stat.Init();
 
-        var allAttributes = FindObjectsByType<Attributes>(FindObjectsSortMode.None);
-        character = allAttributes.Where(x => x.CompareTag("Player")).FirstOrDefault();
         ChangeState(EnemyState.Chase);
     }
 
