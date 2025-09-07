@@ -973,17 +973,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &655759737 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3544903708009099146, guid: 1e457480cab771e4793fa5cf6adebf8e, type: 3}
-  m_PrefabInstance: {fileID: 5381221876208356801}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &801227445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,11 +2376,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!223 &1388784427 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 6692686440632555162, guid: 1e457480cab771e4793fa5cf6adebf8e, type: 3}
-  m_PrefabInstance: {fileID: 5381221876208356801}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1409104015
 GameObject:
   m_ObjectHideFlags: 0
@@ -4251,18 +4235,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fly
       objectReference: {fileID: 0}
-    - target: {fileID: 6692686440632555162, guid: 1e457480cab771e4793fa5cf6adebf8e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7546789320597477235, guid: 1e457480cab771e4793fa5cf6adebf8e, type: 3}
-      propertyPath: hp
-      value: 
-      objectReference: {fileID: 655759737}
-    - target: {fileID: 7546789320597477235, guid: 1e457480cab771e4793fa5cf6adebf8e, type: 3}
-      propertyPath: hpCanvas
-      value: 
-      objectReference: {fileID: 1388784427}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
