@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d424cd2b9fa064e8e41aeae95346be, type: 3}
+  m_Name: GravAttackMinSpeedCardSO
+  m_EditorClassIdentifier: 
+  statType: 9
+  title: "\uACF5\uACA9 \uAC00\uB2A5 \uC18D\uB3C4"
+  icon: {fileID: 0}
+  description: "\uB354 \uB290\uB9AC\uAC8C \uB358\uC838\uB3C4 \uD53C\uD574\uB97C \uC785\uD790
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4."

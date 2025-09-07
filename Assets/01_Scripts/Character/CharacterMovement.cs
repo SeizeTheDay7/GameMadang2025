@@ -10,13 +10,14 @@ using System.Collections;
 public class CharacterMovement : MonoBehaviour
 {
     [Header("Components")]
+    [SerializeField] CharacterStat stat;
     PlayerInput playerInput;
     Rigidbody2D body;
     Animator anim;
     SpriteRenderer sr;
 
     [Header("Move Parameters")]
-    [SerializeField] float moveSpeed = 7.5f;
+    // [SerializeField] float moveSpeed = 7.5f;
     [SerializeField] float runMultiplier = 1.5f;
 
     [Header("Jump Parameters")]
@@ -90,12 +91,12 @@ public class CharacterMovement : MonoBehaviour
             if (pressRun)
             {
                 anim.SetFloat("MoveValue", 1f);
-                velX = moveInput * moveSpeed * runMultiplier;
+                velX = moveInput * stat.moveSpeed * runMultiplier;
             }
             else
             {
                 anim.SetFloat("MoveValue", 0.5f);
-                velX = moveInput * moveSpeed;
+                velX = moveInput * stat.moveSpeed;
             }
         }
         else
