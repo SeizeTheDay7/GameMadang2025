@@ -14,16 +14,18 @@ public class GrabbableObject : MonoBehaviour
     [Header("Calculation")]
     float attackMinSpeed;
     float attackDamage;
+    CharacterStat stat;
     Attributes owner;
 
     void Awake()
     {
-        owner = GetComponent<Attributes>();
+        // owner = GetComponent<Attributes>();
         body = GetComponent<Rigidbody>();
     }
 
     public void Grab(CharacterStat stat)
     {
+        this.stat = stat;
         attackMinSpeed = stat.gravAttackMinSpeed;
         attackDamage = stat.gravAttackDamage;
         body.useGravity = false;
@@ -42,24 +44,18 @@ public class GrabbableObject : MonoBehaviour
         body.useGravity = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.TryGetComponent(out Attributes target))
         {
-            if (!owner)
-            {
-                Debug.LogError("No Attributes component found in the GrabbableObject.");
-                target.TakeDamage(10);
-                return;
-            }
-
-            bool isEnemy = target.transform.TryGetComponent(out EnemyBase enemy);
+            bool isEnemy = target.transform.TryGetComponent(out FlyingEnemy enemy);
             bool fastEnough = body.linearVelocity.magnitude >= attackMinSpeed;
             // Debug.Log("(Collision occured) Speed of thrown object : " + body.linearVelocity.magnitude);
 
             if (isEnemy && fastEnough)
             {
-                target.TakeDamage(attackDamage);
+                target.TakeDamage(stat);
+                Destroy(this.gameObject);
             }
         }
     }

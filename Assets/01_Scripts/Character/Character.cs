@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
     public Dictionary<string, List<float>> statUpInfoDict = new Dictionary<string, List<float>>();
     public List<float> expInfoDict = new List<float>();
 
-    void Start()
+    void Awake()
     {
         InitStatData();
         InitExpData();
@@ -108,7 +108,6 @@ public class Character : MonoBehaviour
             $"MaxJump: {stat.maxJump}\n" +
             $"RunningSpeed: {stat.moveSpeedMultiplier}\n" +
             $"ReverseGravCoolTime: {stat.reverseGravCoolTime}\n" +
-            $"ReverseGravFallSpeed: {stat.reverseGravFallSpeed}\n" +
             $"HeartDropRate: {stat.heartDropRate}\n" +
             $"InvinsibleTime: {stat.invinsibleTime}\n" +
             $"DodgeRate: {stat.dodgeRate}\n" +
@@ -187,6 +186,7 @@ public class Character : MonoBehaviour
             var statCardSO = statUpCardSODict[type];
             card.SetType(type);
             card.title.text = statCardSO.title;
+            card.image.sprite = statCardSO.icon;
             card.detail.text = statCardSO.description;
         }
 
@@ -227,9 +227,6 @@ public class Character : MonoBehaviour
             case StatType.ReverseGravCoolTime:
                 stat.reverseGravCoolTime = data;
                 break;
-            case StatType.ReverseGravFallSpeed:
-                stat.reverseGravFallSpeed = data;
-                break;
             case StatType.HeartDropRate:
                 stat.heartDropRate = data;
                 break;
@@ -247,9 +244,6 @@ public class Character : MonoBehaviour
                 break;
             case StatType.BoxSpawnCoolTime:
                 stat.boxSpawnCoolTime = data;
-                break;
-            case StatType.PortalSpawnCoolTime:
-                stat.portalSpawnCoolTime = data;
                 break;
             // case StatType.ThrowableMonster:
             //     stat.throwableMonster = (MonsterType)(int)data;

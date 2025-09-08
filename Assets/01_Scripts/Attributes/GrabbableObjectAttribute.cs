@@ -10,20 +10,20 @@ public class GrabbableObjectAttribute : Attributes
         currentHealth = maxHealth;
     }
 
-    public override void TakeDamage(float damage)
-    {
-        currentHealth = Mathf.Max(currentHealth - 1, 0);
-        Debug.Log("Current Health: " + currentHealth);
+    // public override void TakeDamage(float damage)
+    // {
+    //     currentHealth = Mathf.Max(currentHealth - 1, 0);
+    //     Debug.Log("Current Health: " + currentHealth);
 
-        if (currentHealth == 0)
-        {
-            Die();
-        }
-    }
+    //     if (currentHealth == 0)
+    //     {
+    //         Die();
+    //     }
+    // }
 
-    protected override void Die()
-    {
-        Debug.Log(gameObject.name + " disabled. respawn after " + respawnTime + " seconds.");
-        gameObject.SetActive(false);
-    }
+    // protected override void Die()
+    // {
+    //     Debug.Log(gameObject.name + " disabled. respawn after " + respawnTime + " seconds.");
+    //     gameObject.SetActive(false);
+    // }
 }
