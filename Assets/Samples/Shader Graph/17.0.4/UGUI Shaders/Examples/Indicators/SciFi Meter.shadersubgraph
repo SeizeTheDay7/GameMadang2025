@@ -647,6 +647,20 @@
             },
             "m_InputSlot": {
                 "m_Node": {
+                    "m_Id": "05f9771b310a49bcbf35bd3eec696511"
+                },
+                "m_SlotId": -1126041241
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "c8031715b0134a3ebf45cb2a69258c82"
+                },
+                "m_SlotId": 3
+            },
+            "m_InputSlot": {
+                "m_Node": {
                     "m_Id": "f7b06e6614234c18a4aab42e1459d612"
                 },
                 "m_SlotId": -262913701
@@ -790,20 +804,6 @@
                     "m_Id": "98be288d9c854e08a849cb8c331bd86a"
                 },
                 "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "f7b06e6614234c18a4aab42e1459d612"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "05f9771b310a49bcbf35bd3eec696511"
-                },
-                "m_SlotId": -1126041241
             }
         },
         {
@@ -2668,8 +2668,8 @@
     "m_ObjectId": "6a918cc7c274453d93a2a421ded94c87",
     "m_Title": "Create Button UVs",
     "m_Position": {
-        "x": -1047.0001220703125,
-        "y": 1306.0
+        "x": -1047.2000732421875,
+        "y": 1304.7998046875
     }
 }
 
@@ -2890,8 +2890,8 @@
     "m_ObjectId": "7bebbfe07277490792d90e48a7564aeb",
     "m_Title": "Shake UVs when health is low",
     "m_Position": {
-        "x": -1755.0001220703125,
-        "y": 1161.4998779296875
+        "x": -1755.2001953125,
+        "y": 1160.0001220703125
     }
 }
 
@@ -3980,8 +3980,8 @@
     "m_ObjectId": "b93cf151851c43dda0f3141851420008",
     "m_Title": "Progress Multiplier",
     "m_Position": {
-        "x": 138.9998321533203,
-        "y": 1305.4998779296875
+        "x": 138.400146484375,
+        "y": 1304.0001220703125
     }
 }
 
@@ -4965,8 +4965,8 @@
     "m_ObjectId": "de2112479c4b4d22944529bd20bffa96",
     "m_Title": "Segment Divisions",
     "m_Position": {
-        "x": 328.9999084472656,
-        "y": 735.0
+        "x": 328.800048828125,
+        "y": 733.60009765625
     }
 }
 

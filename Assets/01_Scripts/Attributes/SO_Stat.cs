@@ -16,7 +16,7 @@ public class SO_Stat : ScriptableObject
 
     public void Init()
     {
-        AttackCooldownTime = new WaitForSeconds(AttackCooldown);
+        AttackCooldownTime = new WaitForSeconds(AttackCooldown * 3);
         IdleTimeWait = new WaitForSeconds(IdleTime);
     }
 }

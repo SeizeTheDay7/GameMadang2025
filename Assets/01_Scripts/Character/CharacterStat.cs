@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public enum StatType
 {
@@ -31,6 +31,7 @@ public class CharacterStat : MonoBehaviour
     public float currentExp = 0;
     public int currentLevel = 0;
     public bool isInvinsible { get; private set; } = false;
+    SpriteRenderer[] spriteRenderer;
 
     [Header("Level")]
     public int[] currentStatLevels;
@@ -64,6 +65,7 @@ public class CharacterStat : MonoBehaviour
     public void Awake()
     {
         currentStatLevels = new int[System.Enum.GetValues(typeof(StatType)).Length];
+        spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void OnEnable()
@@ -93,8 +95,8 @@ public class CharacterStat : MonoBehaviour
         if (isInvinsible) return;
         if (Random.value < dodgeRate * 0.01f) { Dodge(); return; }
 
-        currentHealth -= damage;
-        GlobalData.OnHPChange?.Invoke(currentHealth);
+        currentHealth = Mathf.Max(0, currentHealth - damage);
+        GlobalData.OnHPChange?.Invoke((float)((float)currentHealth / maxHealth));
         if (currentHealth <= 0) { Dead(); }
         else { StartCoroutine(CoInvinsible()); }
     }
@@ -109,12 +111,24 @@ public class CharacterStat : MonoBehaviour
     {
         isInvinsible = true;
         // TODO :: sprite renderer 투명해짐
+        foreach (var sr in spriteRenderer)
+        {
+            Color color = sr.color;
+            color.a = 0.5f;
+            sr.color = color;
+        }
         yield return new WaitForSeconds(invinsibleTime);
+        foreach (var sr in spriteRenderer)
+        {
+            Color color = sr.color;
+            color.a = 1f;
+            sr.color = color;
+        }
         isInvinsible = false;
     }
 
     private void Dead()
     {
-        // return to main menu
+       SceneChangeManager.Instance.LoadSceneAsync("GameOver");
     }
 }

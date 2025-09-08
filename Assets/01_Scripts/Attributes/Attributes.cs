@@ -34,6 +34,8 @@ public class Attributes : MonoBehaviour
     // CharacterStat은 grabbableObject가 갖고있던 참조를 갖고 와서, 죽을 때 사용한다.
     public virtual void TakeDamage(CharacterStat stat)
     {
+        if (isPlayer) return;
+
         currentHealth = Mathf.Max(currentHealth - stat.gravAttackDamage, 0);
         Debug.Log("Current Health: " + currentHealth);
         UpdateUI();
@@ -76,7 +78,7 @@ public class Attributes : MonoBehaviour
 
     private void UpdateUI()
     {
-        // hpCanvas.enabled = true;
-        // hp.fillAmount = currentHealth / maxHealth;
+         hpCanvas.enabled = true;
+         hp.fillAmount = currentHealth / maxHealth;
     }
 }

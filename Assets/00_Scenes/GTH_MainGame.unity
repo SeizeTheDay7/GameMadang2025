@@ -2613,7 +2613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timelimit: 300
   timer: {fileID: 1456214469}
-  boss: {fileID: 0}
+  boss: {fileID: 454394698253527647, guid: d7ba564e604b1244b93b8471c820eeef, type: 3}
 --- !u!1 &631494975
 GameObject:
   m_ObjectHideFlags: 0
@@ -4606,6 +4606,10 @@ PrefabInstance:
       propertyPath: character
       value: 
       objectReference: {fileID: 1524600509}
+    - target: {fileID: 3641598229667718310, guid: f1ca58ee20259d74ba4822d5b237d4c6, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 9006626739395395678, guid: f1ca58ee20259d74ba4822d5b237d4c6, type: 3}
       propertyPath: m_Name
       value: Character

@@ -72,7 +72,7 @@ Material:
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
-    - _BackgroundBlur: 0.679
+    - _BackgroundBlur: 0.377
     - _Background_Saturation: 0.638
     - _BlendMode: 0
     - _Blur: 0.879
@@ -144,10 +144,10 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BackgroundColor: {r: 0.5283019, g: 0, b: 0.41101176, a: 0}
+    - _BackgroundColor: {r: 0.6150943, g: 0.6150943, b: 0.6150943, a: 0}
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Tint: {r: 0.02441454, g: 0, b: 1, a: 1}
+    - _Tint: {r: 0.3001574, g: 0.29636878, b: 0.4188679, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

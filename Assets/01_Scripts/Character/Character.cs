@@ -140,6 +140,7 @@ public class Character : MonoBehaviour
             stat.currentLevel++;
             LevelUp();
         }
+        GlobalData.OnExpChange?.Invoke(stat.currentExp / (stat.currentLevel < expInfoDict.Count ? expInfoDict[stat.currentLevel] : expInfoDict[expInfoDict.Count - 1]));
     }
 
     public void LevelUp()
