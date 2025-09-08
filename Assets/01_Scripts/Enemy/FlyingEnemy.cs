@@ -77,6 +77,9 @@ public class FlyingEnemy : MonoBehaviour
         if (attributes.Stat.AttackCooldownTime == null || attributes.Stat.IdleTimeWait == null)
             attributes.Stat.Init();
 
+        if(!character)
+            character = GameObject.FindWithTag("Player").GetComponent<Attributes>();
+
         ChangeState(EnemyState.Chase);
     }
 

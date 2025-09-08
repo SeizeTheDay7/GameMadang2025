@@ -77,5 +77,9 @@ public class BossAttack : MonoBehaviour
         newProjectile.Init(player, projectileDamage);
     }
 
+    private void OnDestroy()
+    {
+        SceneChangeManager.Instance.LoadSceneAsync("GameOver");
+    }
 
 }

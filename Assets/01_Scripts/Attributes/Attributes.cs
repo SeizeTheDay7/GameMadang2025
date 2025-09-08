@@ -78,6 +78,8 @@ public class Attributes : MonoBehaviour
 
     private void UpdateUI()
     {
+        if (isPlayer) return;
+
          hpCanvas.enabled = true;
          hp.fillAmount = currentHealth / maxHealth;
     }
