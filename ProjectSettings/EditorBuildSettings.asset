@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scenes/Lobby.unity
     guid: bae9bad86aa83f04191f25f853228307
-  - enabled: 1
+  - enabled: 0
     path: Assets/00_Scenes/KJH_TestScene.unity
     guid: b8c927c8f7fed2e47845de597815a676
   - enabled: 1
+    path: Assets/00_Scenes/GTH_MainGame.unity
+    guid: b431942ef4218424fa3c8b05f236a7aa
+  - enabled: 0
     path: Assets/00_Scenes/LoadingScene.unity
     guid: 9fb1fb29f9b9cec44bd6f5aff6317f23
   - enabled: 1
