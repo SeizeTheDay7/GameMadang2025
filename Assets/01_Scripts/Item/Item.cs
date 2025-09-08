@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Attributes attributes))
+        if (other.TryGetComponent(out CharacterStat attributes))
         {
             if (other.gameObject.CompareTag("Player"))
             {
@@ -18,7 +18,7 @@ public class Item : MonoBehaviour
                     particle.Play();
                     particle.transform.SetParent(null);
                 }
-                attributes.Heal(healAmount);
+                attributes.HealHealth((int)healAmount);
                 Destroy(gameObject);
             }
         }

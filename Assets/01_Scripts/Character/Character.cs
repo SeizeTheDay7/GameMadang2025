@@ -23,6 +23,11 @@ public class Character : MonoBehaviour
     public Dictionary<string, List<float>> statUpInfoDict = new Dictionary<string, List<float>>();
     public List<float> expInfoDict = new List<float>();
 
+    [SerializeField] TextAsset statSheet;
+    [SerializeField] TextAsset expAsset;
+    [SerializeField] TextAsset monstrtSpawn;
+
+
     void Awake()
     {
         InitStatData();
@@ -57,8 +62,8 @@ public class Character : MonoBehaviour
 
     private void InitStatData()
     {
-        string filePath = Path.Combine(Application.dataPath, "StatSheet.csv");
-        string[] lines = File.ReadAllLines(filePath);
+        // TextAsset.text는 전체 텍스트를 반환하므로, 줄 단위로 분리
+        string[] lines = statSheet.text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
 
         for (int i = 1; i < lines.Length; i++)
         {
@@ -70,30 +75,33 @@ public class Character : MonoBehaviour
                 if (statUpInfoDict.ContainsKey(type))
                 {
                     if (string.IsNullOrWhiteSpace(values[j])) continue;
-                    statUpInfoDict[type].Add(float.Parse(values[j]));
+                    statUpInfoDict[type].Add(float.Parse(values[j], CultureInfo.InvariantCulture));
                 }
                 else
-                    statUpInfoDict[type] = new List<float>() { float.Parse(values[j]) };
+                {
+                    statUpInfoDict[type] = new List<float>() { float.Parse(values[j], CultureInfo.InvariantCulture) };
+                }
             }
         }
 
         foreach (var kvp in statUpInfoDict)
         {
             string type = kvp.Key;
-            string values = string.Join(", ", kvp.Value.Select(v => v.ToString()));
+            string values = string.Join(", ", kvp.Value.Select(v => v.ToString(CultureInfo.InvariantCulture)));
             Debug.Log($"StatUpDict[{type}] = [{values}]");
         }
     }
 
     private void InitExpData()
     {
-        string filePath = Path.Combine(Application.dataPath, "ExpSheet.csv");
-        string[] lines = File.ReadAllLines(filePath);
+        // expAsset(TextAsset)에서 직접 데이터 읽기
+        string[] lines = expAsset.text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+        if (lines.Length < 2) return;
         string[] expNeed = lines[1].Split(',');
         for (int i = 1; i < expNeed.Length; i++)
-            expInfoDict.Add(float.Parse(expNeed[i]));
+            expInfoDict.Add(float.Parse(expNeed[i], CultureInfo.InvariantCulture));
 
-        string values = string.Join(", ", expInfoDict.Select(v => v.ToString()));
+        string values = string.Join(", ", expInfoDict.Select(v => v.ToString(CultureInfo.InvariantCulture)));
         Debug.Log($"LevelUpNeedEXP: [{values}]");
     }
 
