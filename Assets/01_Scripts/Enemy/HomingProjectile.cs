@@ -30,7 +30,7 @@ public class HomingProjectile : MonoBehaviour
         {
             if (target.CompareTag("Player"))
             {
-                target.TakeDamage(damage);
+                target.Heal(-damage);
                 Destroy(gameObject);
             }
         }
